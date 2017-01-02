@@ -1,0 +1,265 @@
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+#{extends 'common/frontMain.html' /} 
+#{set title:currBackstageSet.seoTitle + ' | 我的账户   | 资金管理  | 充值'/}
+
+<!-- 内容区域 start -->
+<div class="xf_con_box">
+	<div class="xf_con_mem_nav"></div>
+	<!-- 左边导航区域 -->
+	#{include "front/account/AccountHome/homeLeft.control"/}
+	<!-- 右侧内容区域 -->
+	<div class="xf_mem_Account xf_mem_shzdjkb_box">
+	               #{form @submitRecharge(), id:'paySubmit',target:"a" }
+	                <input type="hidden" id="type" name="type" />
+	                <input type="hidden" id="bankType" name="bankType" />
+					<h3 class="xf_mem_accout_title">充值</h3>
+					<!-- 充值 -->
+					<div class="xf_mem_accout_content">
+						<table border="0" cellpadding="0" cellspacing="0" width="738" class="xf_mem_zjgl_cz">
+				
+							<tr>
+								<td align="right">账&nbsp;&nbsp;&nbsp;&nbsp;号：</td>
+								<td>${user?.name}</td>
+							</tr>
+							<tr>
+								<td align="right">请输入充值金额： </td>
+								<td><input class="xf_mem_zjgl_czinput" type="text" id="money" name="money">  元</td>
+							</tr>
+						</table>
+					</div>
+					<div class="xf_mem_zflx">
+						<div class="xf_mem_zflx_lt">充值类型：</div>
+						<ul id="xf_wyjkview_xxkil" class="clr">
+						    #{if payType[0]?.is_use == true}
+							<li class="xf_mem_img_ishow" id="ul_li_1" onClick="select(1)"><img src="@{'/public/images/banks/gopay.png'}" alt="国付宝"></li>
+						    #{/if}
+						   
+						    #{if payType[1]?.is_use == true}
+							<li id="ul_li_2" onClick="select(2)"><img src="@{'/public/images/banks/ipay.png'}" alt="环迅支付"></li>
+						    #{/if}
+						   
+						    #{if payType[2]?.is_use == true}
+							<li id="ul_li_3" onClick="select(3)"><img src="@{'/public/images/banks/wangyin.png'}" alt="网银支付"></li>
+						    #{/if}
+						   
+						    #{if payType[3]?.is_use == true}
+						    <li id="ul_li_5" onClick="select(5)"><img src="@{'/public/images/banks/huichao.png'}" alt="汇潮支付"></li>							
+						    #{/if}					  
+						    #{if payType[4]?.is_use == true}
+							<li id="ul_li_4" onClick="select(4)"><img src="@{'/public/images/banks/baofu.png'}" alt="宝付"></li>
+						    #{/if}
+						    
+						    
+						 
+						</ul>
+					</div>
+					<h3 class="xf_mem_zflx_lti">选择支付方式：</h3>
+					<!-- 国付宝支持银行 -->
+					<div class="xf_mem_acc_titlebox" id="selectBank">
+						<ul class="xf_mem_accout_titleUL clr">
+
+						</ul>
+					</div>
+					<!-- 环游支付支持 -->
+					<div class="xf_mem_acc_titlebox" id="payTypes">
+						<ul class="xf_mem_accout_titleUL clr">
+							
+						</ul>
+					</div>
+					
+					<div class="xf_mem_acc_titlebox" id="wangyin">网银在线</div>
+						<div class="xf_mem_acc_titlebox" id="huichao">汇潮支付</div>
+					<div class="xf_mem_acc_titlebox" id="baofu">宝付支付</div>
+				
+					
+					
+					
+					<div class="xf_mem_zjgl_input_atijiao">
+						<a Onclick="recharge()" class="xf_con_inputfbjk">确定充值</a>
+					</div>
+				</div>
+				#{/form}
+				<!-- 清除浮动 -->
+				<div class="clear"></div>
+			</div>
+<!-- 内容区域 end -->
+<script type="text/javascript">
+        var bankNum;
+        var typeNum
+    
+	    $(function(){
+	        if(${payType[0]?.is_use} & ${payType[1]?.is_use} ){
+	             $("#payTypes").hide();
+	             $("#selectBank").show();
+	             $("#type").val(0);
+	             $("#bankType").val(1);
+	        }else{
+	            if(${payType[0]?.is_use}){
+	               $("#payTypes").hide();
+	               $("#selectBank").show();
+	               $("#type").val(0);
+	               $("#bankType").val(1);
+	               return;
+	            }
+	            
+	            if(${payType[1]?.is_use}){
+	               $("#payTypes").show();
+	               $("#selectBank").hide();
+	               $("#type").val(0);
+	               $("#bankType").val(2);
+	               return;
+	            }
+	           if(${payType[2]?.is_use}){	              
+	               $("#type").val(0);
+	               $("#bankType").val(3);
+	               return;
+	            }
+	            
+	            if(${payType[3]?.is_use}){
+	            
+                   $("#type").val(0);
+	               $("#bankType").val(4);
+	               return;
+	            }
+	            
+	             if(${payType[4]?.is_use}){
+	            
+                   $("#type").val(0);
+	               $("#bankType").val(5);
+	               return;
+	            }
+            
+	        }
+		})
+		
+	  function recharge(){
+      
+	      if($("#type").val() == ''){
+	         alert("请选择充值类型");
+	         return;
+	      }
+	      
+	      if($("#bankType").val() == ''){
+	         alert("请选择支付方式");
+	         return;
+	      }
+	      
+	     
+	      
+	      $("#paySubmit").submit();
+	  }	
+	  
+	  function select(num){
+	      if(num == 1){
+	          
+	          $("#payTypes").hide();
+	          $("#wangyin").hide();
+	          $("#baofu").hide();
+	          $("#huichao").hide();
+	          $("#selectBank").show();
+	          
+	         
+	         
+	          $("#ul_li_2").removeClass("xf_mem_img_ishow");
+	          
+	          $("#ul_li_1").addClass("xf_mem_img_ishow");
+	          $("#type").val(0);
+	           $("#bankType").val(num);
+	      }
+	      
+	      if(num == 2){
+	      
+	          $("#selectBank").hide();
+	          $("#wangyin").hide();
+	          $("#baofu").hide();
+	          $("#huichao").hide();
+	          $("#payTypes").show();
+	         
+	          $("#ul_li_4").removeClass("xf_mem_img_ishow");
+	          $("#ul_li_3").removeClass("xf_mem_img_ishow");
+	          $("#ul_li_1").removeClass("xf_mem_img_ishow");
+	          
+	          $("#ul_li_2").addClass("xf_mem_img_ishow");
+	          $("#type").val(0);
+	           $("#bankType").val(num);
+	      }
+	      if(num ==3){
+	          $("#payTypes").hide();	        
+	          $("#baofu").hide();
+	          $("#selectBank").hide();
+	          $("#huichao").hide();  
+	          $("#wangyin").show();
+	      
+	          $("#ul_li_5").removeClass("xf_mem_img_ishow");	        
+	          $("#ul_li_4").removeClass("xf_mem_img_ishow");
+	          $("#ul_li_3").removeClass("xf_mem_img_ishow");
+	          $("#ul_li_1").removeClass("xf_mem_img_ishow");	          
+	          $("#ul_li_3").addClass("xf_mem_img_ishow");
+	          $("#type").val(0);
+	          $("#bankType").val(num);
+	      
+	      }
+	      
+	      if(num==4){
+	      	  $("#payTypes").hide();	        
+	          $("#baofu").show();
+	          $("#selectBank").hide();  
+	          $("#wangyin").hide();
+	          $("#huichao").hide();
+	      
+              $("#ul_li_5").removeClass("xf_mem_img_ishow");	        	      
+	          $("#ul_li_2").removeClass("xf_mem_img_ishow");
+	          $("#ul_li_3").removeClass("xf_mem_img_ishow");
+	          $("#ul_li_1").removeClass("xf_mem_img_ishow");	          
+	          $("#ul_li_4").addClass("xf_mem_img_ishow");	
+	          $("#type").val(0);      
+	          $("#bankType").val(num);	      	      
+	      }
+	      
+	       if(num==5){
+	      	  $("#payTypes").hide();	        
+	          $("#baofu").hide();
+	          $("#selectBank").hide();  
+	          $("#wangyin").hide();
+	          $("#huichao").show();
+	          
+	          $("#ul_li_4").removeClass("xf_mem_img_ishow");
+	          $("#ul_li_2").removeClass("xf_mem_img_ishow");
+	          $("#ul_li_3").removeClass("xf_mem_img_ishow");
+	          $("#ul_li_1").removeClass("xf_mem_img_ishow");	          
+	          $("#ul_li_5").addClass("xf_mem_img_ishow");	
+	          $("#type").val(0);      
+	          $("#bankType").val(num);	      	      
+	      }
+	      
+	      
+}
+	  
+	  function selectBank(num){
+	      $("#bank_0").removeClass("xf_mem_img_ishowt");
+	      $("#bank_"+bankNum).removeClass("xf_mem_img_ishowt");
+	      $("#bank_"+num).addClass("xf_mem_img_ishowt");
+	      $("#bankType").val(num)
+	      bankNum = num;
+	  }
+	  
+	  function payTypes(num){
+	      $("#pay_"+typeNum).removeClass("xf_mem_img_ishowt");
+	      $("#pay_0").removeClass("xf_mem_img_ishowt");
+	      $("#pay_"+num).addClass("xf_mem_img_ishowt");
+	      $("#bankType").val(num);
+	      typeNum = num;
+	  }
+</script>
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_usr.js'}"></script>
+<script type="text/javascript">
+<!--
+	$(function(){
+		/* 高亮显示 */
+		showHighLightFront(27);
+		showHighLightFront2(7, 5);
+	});
+//-->
+</script>

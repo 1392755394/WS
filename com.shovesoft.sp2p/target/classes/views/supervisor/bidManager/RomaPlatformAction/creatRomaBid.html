@@ -1,0 +1,294 @@
+<link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.ico'}">
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/site.css'}" />		
+
+#{extends 'common/supervisor.html' /} 
+<div class="xn_c_contentwarp">
+  <div class="xn_c_contentlist">
+  #{include '/supervisor/bidManager/bidManagerLeft.control'/}  
+       <div class="xn_c_content">
+        <div class="xf_content_add"> 
+           <div style="margin-left:-50px;background:#FFF; padding-left:20px; ">
+		  &nbsp  &nbsp  &nbsp  &nbsp
+		  
+#{form @sumitCreatRomaBid(romaBid), method:'POST',id:'createBid'}		  
+		<!--1/填写基本信息 start-->
+		<div class="xf_c_wyjkfb_3_jbxxColName">
+			<span class="xf_c_wyjkfb_3_jbxxColbg">1/</span><span>填写基本信息</span>
+		</div>
+		<div class="xf_c_wyjkfb_3_jbxxCont">
+				<div class="xf_c_wyjkfb_3_jbxxColunm">
+				<div class="xf_c_wyjkfb_3_jbxxTitle">借款用途：</div>
+				<div class="xf_c_wyjkfb_3_jbxxText">
+						<select class="xf_c_wyjkfb_3_jkytSel" name="romaBid.roma_loan_purpose_id" id="purposeId">
+						<option value="0">
+							请选择
+						</option>
+						#{list purpose}
+							<option value="${_?.id}" 
+								#{if loanBid?.purpose?.id == _?.id}
+									selected="selected"
+								#{/if}
+							>
+							${_?.name}
+							</option>
+						#{/list}
+						</select>
+					</div>
+				<div class="clear"></div>
+			</div>
+			<div class="xf_c_wyjkfb_3_jbxxColunm">
+				<div class="xf_c_wyjkfb_3_jbxxTitle">
+					借款标题：
+				</div>
+				<div class="xf_c_wyjkfb_3_jbxxText">
+					<div>
+						<input type="text" class="xf_c_wyjkfb_3_jbxxTitleInp" id="title" name="romaBid.roma_title" 
+						maxlength="24"  />
+					</div>
+					<div class="xf_c_wyjkfb_3_jbxxTitleTips">
+						不超过24个汉字，重视标题描述，能加快借款满标。
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>		
+			<div class="xf_c_wyjkfb_3_jbxxColunm">
+				<div class="xf_c_wyjkfb_3_jbxxTitle">
+					借款期限：
+				</div>
+				<div class="xf_c_wyjkfb_3_jbxxText">
+		     	<input type="text" class="xf_c_wyjkfb_3_nllInp" id="period" name="romaBid.roma_period"/>
+					<span class="xf_c_wyjkfb_3_nllPer">
+						天
+					</span>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="xf_c_wyjkfb_3_jbxxColunm">
+				<div class="xf_c_wyjkfb_3_jbxxTitle">
+					还款方式：
+				</div>
+				<div class="xf_c_wyjkfb_3_jbxxText">
+					<select class="xf_c_wyjkfb_3_jkytSel" name="romaBid.roma_repaymentType" id="repaymentType">
+					
+				       <option value="无本金,一次性付利息">无本金,一次性付利息</option>				   
+						
+					</select>
+				</div>
+				<div class="clear"></div>
+			</div>
+		
+			<div class="xf_c_wyjkfb_3_jbxxColunm">
+				<div class="xf_c_wyjkfb_3_jbxxTitle">
+					年利率：
+				</div>
+				<div class="xf_c_wyjkfb_3_jbxxText">
+					<input type="text" class="xf_c_wyjkfb_3_nllInp" id="apr" name="romaBid.roma_apr" 
+					onkeyup="value=value.replace(/[^\d\.]/g, '').replace(/(\.\d{2}).*/g, '$1')"/>
+					<span class="xf_c_wyjkfb_3_nllPer">
+						%利率:
+					</span>
+				</div>
+				<div class="clear"></div>
+			</div>
+			
+		<div class="xf_c_wyjkfb_3_jbxxColunm">
+				<div class="xf_c_wyjkfb_3_jbxxTitle xf_c_wyjkfb_3_payInfo">
+					借款图像：
+				</div>
+				<div class="xf_c_wyjkfb_3_jbxxText">
+					   <input type="hidden" name="romaBid.roma_image_filename" id="imageFilename"/>
+				
+						#{img src:"${loanBid?.imageFilename}",id:"loanImage",alt:"头像",width:"110px",height:"110px"}#{/img}
+						<div>
+						<input type="file" id="imgFile" name="imgFile" />
+						<input type="button" onclick="uploadImage('imgFile','loanImage');" value="上传"/>
+						</div>
+				
+				</div>
+				
+				<div class="clear"></div>
+			</div>
+			
+			
+			<div class="xf_c_wyjkfb_3_jbxxColunm">
+				<div class="xf_c_wyjkfb_3_jbxxTitle xf_c_wyjkfb_3_payInfo">
+					借款资料图片：
+				</div>
+				<div class="xf_c_wyjkfb_3_jbxxText">
+					<input type="hidden" name="romaBid.roma_audit_filename" id="audit_filename" />
+				          #{img src:"${loanBid?.audit_filename}",id:"auditImage",alt:"借款资料",width:"110px",height:"110px"}#{/img}
+						<div>
+						<input type="file" id="imgFileOne" name="imgFile" />
+						<input type="button" onclick="uploadImage('imgFileOne','auditImage');" value="上传"/>
+						</div>
+			
+				</div>				
+				<div class="clear"></div>
+			</div>	
+		</div>
+		<!--1/填写基本信息 ends-->
+	
+	<div class="xf_c_wyjkfb_3_jkxqWrap">
+		<!--2/描述借款详情 start-->
+		<div class="xf_c_wyjkfb_3_jbxxColName">
+			<span class="xf_c_wyjkfb_3_jbxxColbg">2/</span><span>描述借款详情</span>
+		</div>
+		<div class="xf_c_wyjkfb_3_jkxqCont">
+		
+			<div class="xf_c_wyjkfb_3_jkxqIntro">
+				<textarea cols="115" rows="5" name="romaBid.roma_description" id="description"></textarea>
+				<br />
+				<span class="xf_c_wyjkfb_3_jkxqIntroTips">请对借款用途，还款能力进行详细说明。</span>
+			</div>
+		</div>
+		<!--2/描述借款详情 ends-->
+	</div>
+	<div class="xf_c_wyjkfb_3_tbjlWrap">
+		<!--3/设置投标奖励 start-->
+		<div class="xf_c_wyjkfb_3_jbxxColName">
+			<span class="xf_c_wyjkfb_3_jbxxColbg">3/</span><span>设置投标奖励</span>
+		</div>
+		<div class="xf_c_wyjkfb_3_tbjlCont">
+			<div class="xf_c_wyjkfb_3_tbjlColunm">
+				<label for="xf_c_wyjkfb_3_jlNotSet">
+					<input type="radio"    value="0" id="noaward"  checked="checked"
+					 />
+					不设置奖励
+				</label>
+			</div>
+			
+		</div>
+		<!--3/设置投标奖励 ends-->
+	</div>
+	<div class="xf_c_wyjkfb_3_submitWrap">
+		<input type="submit" value="提交发布" class="xf_c_wyjkfb_3_submiBtn" id="xf_c_wyjkfb_3_submiBtn" />
+	</div>
+#{/form}
+</form>
+</div>
+</div>
+
+
+	<!-- 成功 -->
+	#{if result>0}
+	<div class="xf_wyjkfb_4_window" id="xf_wyjkfb_4_window">
+		<div class="xf_wyjkfb_4_windowInner xf_wylcfb_4_windowInner">
+			<div class="xf_wyjkfb_4_windowClose"></div>
+			<div class="xf_wyjkfb_4_windowColName">新手标发布成功 !</div>
+		</div>
+	</div>
+	#{/if}
+
+
+
+
+
+</div>
+</div>
+</div>
+<script type="text/javascript">
+		
+		/* 表单submit事件 */
+		$("#createBid").submit(function(){ 
+		
+			if($("#purposeId").val() == 0){
+				alert("请填写借款用途!");
+				return false;
+			}
+		 
+		   	if($.trim($("#title").val()) == ""){
+				alert("请填写借款标题!");
+				return false;
+			} 
+		   
+		    if($.trim($("#repaymentType").val()) == ""){
+				alert("请选择还款方式!");
+				return false;
+			} 
+		   	var period = $("#period").val();
+		   	
+		   	
+		 
+			if(period == null || period == "" || period == 0){
+				alert("请填写借款期限!");
+				return false;
+			}
+			
+			if(!/^[0-9]*$/.test(period)){
+			
+			    alert("借款期限格式错误!");
+			  return false;
+			
+			}
+		
+		   var apr = $.trim($("#apr").val());
+		   	if(apr == null || apr == "" || apr == 0){
+				alert("请填写借款年利率!");
+				return false;
+			}
+	
+			if(apr.split(".").length > 2){
+				alert("请填写合法的年利率!");
+				return false;
+			}
+	
+			var loanImage = $("#loanImage").attr("src");
+				if(loanImage == "/public/images/default.png" || loanImage == ""){
+					alert("请上传借款图片!");
+					return false;
+				}
+				$("#imageFilename").val(loanImage);
+		
+		
+		        var auditImage = $("#auditImage").attr("src");
+				if(auditImage == "/public/images/default.png" || auditImage == ""){
+					alert("请上传资料补充图片!");
+					return false;
+				}
+				
+				$("#audit_filename").val(auditImage);
+				
+		  	   
+		   var description = $.trim($("#description").val());
+			if(description == "" || description.length > 300){
+				alert("请描述借款详情并控制在1~300个字符单位之间!");
+				return false;
+			}
+				
+			return true;
+		});
+		
+		
+		
+		
+		
+		
+	$(function() {
+		$("a").limit();
+		$("#xf_wyjkfb_4_window").center();
+
+		$(
+				".xf_wyjkfb_4_windowClose,#xf_wyjkfb_4_windowCancle,#xf_con_inputfbqux")
+				.click(function() {
+					$("#xf_wyjkfb_4_window").hide(1500);
+				});
+		//竞拍成功
+		$("#xf_zqzrtb_4_window").center();
+
+		$("#xf_con_inputfbjk").click(function() {
+			$("#xf_wyjkfb_4_window").hide("fast", function() {
+				$("#xf_wyjkfb_4_window").show();
+
+			});
+		});
+		$(".xf_zqzr_4_windowClose").click(function() {
+			$("#xf_zqzrtb_4_window").hide();
+		});
+	});
+		
+		
+		
+		
+
+
+</script>

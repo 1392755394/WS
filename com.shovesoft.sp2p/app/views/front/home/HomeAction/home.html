@@ -1,0 +1,16 @@
+%{ business.BackstageSet currBackstageSet =
+business.BackstageSet.getCurrentBackstageSet(); }% #{extends
+'common/frontMain.html' /} #{set title:currBackstageSet.seoTitle /}
+
+<!-- 大广告 -->
+#{include "front/home/HomeAction/banner.html"/}
+
+<!-- 借款流程/理财流程	 -->
+#{include "front/home/HomeAction/procedures.control"/}
+
+<!-- 借款中的标 -->
+#{include "front/home/HomeAction/bids.control"/}
+
+<!-- 合作伙伴 -->
+#{include "front/home/HomeAction/partner.control"/}
+

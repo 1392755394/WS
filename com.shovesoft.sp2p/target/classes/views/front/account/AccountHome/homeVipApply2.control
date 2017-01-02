@@ -1,0 +1,159 @@
+<div class="xf_zqzr_znx_window" id="xf_mem_acc_sjvip_tcc">
+	<div class="xf_wyjkwszl_4_windowInner xf_vip_tcc_window">
+		<div class="xf_wyjkfb_4_windowClose"></div>
+		<div class="xf_wyjkfb_4_windowColName">
+			申请VIP
+		</div>
+		
+		<div class="xf_mem_tgxytc xf_mem_vipbox">
+			<table border="0" cellpadding="0" cellspacing="0" width="322" class="xf_mem_vip_tcc">
+				<tr>
+					<td>
+						开通对象：
+					</td>
+					<td id="vipObject">
+						${currUser?.name}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						开通时间：
+					</td>
+					<td>
+						<input type="text" class="xf_memvip_input" onkeypress="return inputNum(event)" onpaste="return false" 
+						 id="time" name="time" style="ime-mode:Disabled">
+						<span class="xf_memvip_span" id="times">
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						应付金额：
+					</td>
+					<td>
+						<span class="xf_memvip_qian" id="repayment" name="amount"></span>
+						<span class="xf_memvip_span">元</span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						&nbsp;
+					</td>
+					<td>
+						<input type="checkbox" id="ischeck" onClick="oncheck()" checked="checked" class="xf_register_fxk">
+						<span class="xf_register_intext xf_register_intext2">接受并同意</span>
+						<span class="xf_register_inxieyi" onclick="showProtocol()">会员服务条款</span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						&nbsp;
+					</td>
+					<td>
+					<a onClick="submits()" class="xf_con_inputfbjk">确定</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+     
+
+
+	 var vipMinType = '';
+	 if($("#vipMinTimeType").val() == 0) {
+         vipMinType="年";
+     }else{
+        vipMinType="月";
+     }
+     
+     $("#times").html(vipMinType);
+     
+	var minTime = "至少开通"+'${backstageSet.vipMinTimeLength}'+vipMinType;
+	
+	$(function(){
+		//申请vip居中
+		$("#xf_mem_acc_sjvip_tcc").center();
+
+		$("#xf_mem_acc_sjvip").click(function(){
+			$("#xf_mem_acc_sjvip_tcc").show();				
+		});
+		
+		$(".xf_wyjkfb_4_windowClose").click(function(){
+			$(this).parents(".xf_zqzr_znx_window").hide(300);
+		});
+		
+   		$("#time").blur();
+        if($("#time").val() == ''){
+            $("#time").val(minTime);
+        }
+        
+		$("#time").focus(function(){	 
+			if($(this).val() == minTime){  
+              	$(this).val("");           
+		    } 
+		}).blur(function(){
+			if ($(this).val() == '') {
+               $(this).val(minTime);
+            }
+		});	
+		
+		$(".xf_wyjkfb_4_windowClose").click(function(){
+			$(this).parents(".xf_zqzr_znx_window").hide(300);
+		});
+		
+	});
+	
+	function showProtocol() {
+	
+		showDiv($("#xf_mem_zc_xytc"));
+	}	
+/*	
+	function inputNum() {
+		if(!((event.keyCode>=48&&event.keyCode<=57)||event.keyCode == 8 || event.keyCode == 0))  {
+			event.returnValue=false;
+		}
+	}
+*/	
+    $("#time").keydown(function() {
+		var vipFee = '${backstageSet.vipFee}';
+		var time = $("#time").val();
+		
+		$("#repayment").html(vipFee*time);
+	});
+		 
+	 function submits(){
+	 	var time = $("#time").val();
+	 	if(time == '' || time== minTime) {
+	 		alert("请输入申请时间");
+	 		return;
+	 	}
+	 	
+	 	if(time*1 < ('${backstageSet.vipMinTimeLength}')*1) {
+	 		alert("不能小于最短申请时间");
+	 		return;
+	 	}
+	 	var vipApply = #{jsAction @ front.account.AccountHome.vipApply(':time')/}
+		$.post(vipApply({time:time}),function(data){
+			var arr=eval(data);
+			if(arr.error.code < 0){
+			    alert(arr.error.msg);
+			    return;
+			}
+		
+		alert(arr.error.msg);
+		location.reload();
+		
+	  });
+	 }
+	 
+	 function oncheck(){
+		 if($("#ischeck").attr("checked")){
+	         $("#ischeck").disabled = false;
+	    }else{
+	         $("#ischeck").display = none;
+	    }
+	 }
+</script>

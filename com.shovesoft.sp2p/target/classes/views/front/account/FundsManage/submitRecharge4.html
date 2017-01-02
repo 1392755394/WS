@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="content-Type" content="text/html; charset=UTF-8">
+<title>Servlet AccountServlet</title>
+</head>
+<body>
+<form action="${args.url}" id="frm1" method="post">
+
+ <input type="hidden" name="MemberID" value="${args.MemberID}">
+      <input type="hidden" name="TerminalID" value="${args.TerminalID}">
+      <input type="hidden" name="InterfaceVersion" value="${args.InterfaceVersion}">
+      <input type="hidden" name="KeyType" value="${args.KeyType}">
+      <input type="hidden" name="PayID" value="${args.PayID}">
+      <input type="hidden" name="TradeDate" value="${args.TradeDate}">
+      
+      
+      <input type="hidden" name="TransID" value="${args.TransID}">
+      <input type="hidden" name="OrderMoney" value="${args.OrderMoney}">
+      <input type="hidden" name="ReturnUrl" value="${args.ReturnUrl}">
+       <input type="hidden" name="Signature" value="${args.Signature}">
+      <input type="hidden" name="PageUrl" value="${args.PageUrl}">
+      <input type="hidden" name="NoticeType" value="${args.NoticeType}">
+      
+      
+</form>
+<script language="javascript">
+
+document.getElementById("frm1").submit();
+</script>
+</body>
+</html>

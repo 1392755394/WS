@@ -1,0 +1,357 @@
+%{ business.BackstageSet currBackstageSet =
+business.BackstageSet.getCurrentBackstageSet(); }% #{extends
+'common/frontMain.html' /} #{set title:currBackstageSet.seoTitle +' |
+'+romaBid?.roma_title +'借款标详情'/}
+<!-- 内容区域 start -->
+<div class="xf_con_box">
+	<input id="ips_enable" type="hidden" value="${ipsEnable}" />
+	<div class="xf_con_wyjk_nav">
+		<a href="">我要理财</a> <span class="sf_con_wyjk_gtnav">&gt;</span> <span
+			class="sf_con_wyjk_dq">新手标</span>
+	</div>
+	<!-- 借款详细区域 -->
+	<div class="xf_wylc_view_content content_view clr">
+		<!-- 发标用户个人信息 -->
+		<div class="xf_wylc_memmer_l left">
+			<div class="xf_wylc_content_img">#{img
+				src:"${romaBid?.roma_image_filename}",alt:""}#{/img}</div>
+			<div class="xf_wylc_content_input">
+				<a class="xf_wylc_centent_jb">举报此会员</a> <a
+					class="xf_wylc_centent_zn">发送站内信</a> <a class="xf_wylc_centent_zn">关注此人</a>
+			</div>
+
+			<table border="0" cellpadding="0" cellspacing="0" width="180"
+				class="xf_wylc_l_memhy font_onetwo">
+				<tbody>
+					<tr>
+						<td align="left" valign="middle" width="74">会员名称：</td>
+						<td>东邦易贷</td>
+					</tr>
+					<tr>
+						<td align="left" valign="middle">信用等级：</td>
+						<td>管理员</td>
+					</tr>
+					<tr>
+						<td align="left" valign="middle">信用积分：</td>
+						<td>管理员</td>
+					</tr>
+					<tr>
+						<td align="left" valign="middle">借贷记录：</td>
+						<td>0次流标</td>
+					</tr>
+					<tr>
+						<td align="left" valign="top">还款记录：</td>
+						<td>无</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<!-- 借款标信息 -->
+		<div class="xf_wylc_memmer_c left">
+			<table border="0" cellpadding="0" cellspacing="0" width="440"
+				class="xf_wylc_l_viewxx">
+				<tbody>
+					<tr>
+						<td align="left" valign="middle" colspan="2"><span
+							class="xf_wylc_viewTitle">${romaBid.roma_title}</span> <span
+							class="xf_wylc_viewpore">编号：${romaBid.roma_bid_no} </span></td>
+					</tr>
+					<tr>
+						<td align="left" valign="middle" width="100">借款总额：</td>
+						<td align="left" width="340"><span class="xf_wylc_l_memhyA"
+							width="343">1000000元</span></td>
+					</tr>
+					<tr>
+						<td align="left" valign="middle">年利率：</td>
+						<td align="left"><span class="xf_wylc_l_memhyA">${romaBid.roma_apr}%</span>
+						</td>
+					</tr>
+					<tr>
+						<td align="left" valign="middle">借款期限：</td>
+						<td align="left">${romaBid.roma_period}天</td>
+					</tr>
+					<tr>
+						<td align="left" valign="middle">还款日期：</td>
+						<td align="left">${romaBid.roma_period}天</td>
+					</tr>
+					<tr>
+						<td align="left" valign="middle">还款方式：</td>
+						<td align="left">${romaBid.roma_repaymentType}</td>
+					</tr>
+
+					<tr>
+						<td align="left" valign="middle">&nbsp;</td>
+						<td align="left">&nbsp;</td>
+					</tr>
+
+					<tr>
+						<td align="left" valign="middle">投标进度：</td>
+						<td><span class="xf_c_idx_4_proWrap"> <span
+								class="xf_c_idx_4_proPer" id="loanSchedule">30%</span> </span></td>
+					</tr>
+					<tr>
+						<td align="left" valign="middle">投标总数：</td>
+						<td align="left">210</td>
+					</tr>
+					<tr>
+						<td align="left" valign="middle">浏览次数：</td>
+						<td align="left">${romaBid.roma_read_count}</td>
+					</tr>
+		
+					<tr>
+						<td align="left" valign="middle">还需金额：</td>
+						<td align="left">700000元</td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+
+		<script>
+			$(function() {
+
+				$('#loanSchedule').css({
+					"width" : 30
+				})
+			})
+		</script>
+
+		<!-- 确认投标栏 -->
+		#{if romaBid?.roma_status == 0}
+		<div class="xf_wylc_memmer_r left">新手标状态：已经结束</div>
+		<div class="xf_cps_top_r">
+			<div class="xf_wylc_erweima">
+				<img src="@{Application.images}?uuid=${romaBid?.roma_qc_code}"
+					class="xf_wylc_erweima_img" alt="二维码" title="二维码"> <span
+					class="xf_wylc_erweima_text"> 扫一扫<br /> 推荐好友加入我们 </span>
+			</div>
+		</div>
+		#{/if} 
+		#{else}
+		<div class="xf_wylc_memmer_r left">
+			借款状态：正在进行 <br />
+				#{form @front.invest.Roma_InvestAction.investRomaBid(romaBid?.id),method:'POST', id:'confirmInvestBottom'}			
+	      	 <span>选择您可以用的红包:</span></br>   
+	         	 		
+	         	 #{if newCum !=null }
+		        <input type="radio" id="investAmountBottom"  name="investAmountBottom" value="${newCum?.Red_Amount}"/>${newCum?.Red_Amount}元 &nbsp &nbsp &nbsp &nbsp${newCum?.Red_Details}</br>
+		         #{/if}
+		         #{if newCum==null}
+		                               无        </br>
+		         #{/if}	         		 
+		  	 
+			                        交易密码：<input type="password" class="xf_wylc_tbje" id="dealpwd" name="dealpwd"></br></br>  
+			       #{if user != null && user.payPassword == null}
+			       <a href="@{front.account.BasicInformation.modifyPassword()}" class="xf_ta_onclick">您未设置交易密码！点击此处设置交易密码</a></br>
+			      #{/if}			 			
+			 <a class="xf_con_inputfbjk" onclick="confirmInvest()" >确认投标</a>		
+		</div>
+	#{/form}
+		<div class="xf_cps_top_r">
+			<div class="xf_wylc_erweima">
+				<img src="@{Application.images}?uuid=${romaBid?.roma_qc_code}"
+					class="xf_wylc_erweima_img" alt="二维码" title="二维码"> <span
+					class="xf_wylc_erweima_text"> 扫一扫<br /> 推荐好友加入我们 </span>
+			</div>
+		</div>
+		#{/else}
+	</div>
+
+	<!-- 借款标详情  投标记录   借款标提问记录-->
+	<div class="xf_wylc_jkbxq_Tab" id="xf_wyjkview_xxk">
+		<ul class="xf_wylc_jkbxq_Tabul clr">
+			<li class="xf_con_wyjk_r_liishot">借款标详情</li>
+			<li id="investRecords">投标记录</li>
+			<li class="xf_con_wyjk_r_liNoborder" id="bidInvestQuestions">向借款人提问</li>
+			<li>资料补充</li>
+		</ul>
+		<div class="xf_con_wyjk_tentultbody">
+			<table border="0" cellpadding="0" cellspacing="0" width="957"
+				class="xf_wylc_viewcpms font_onetwo">
+				<tbody>
+					<tr>
+						<td width="64" align="center" valign="middle"
+							class="xf_wyjk_taletitle">借款人基本资料</td>
+						<td width="852">
+							<table border="0" cellpadding="0" cellspacing="0" width="100%"
+								class="xf_wylc_viewcpms_Tab">
+								<tbody>
+									<tr>
+										<td valign="middle" width="83">真实姓名：</td>
+										<td width="188">东邦易贷</td>
+										<td width="86">性别：</td>
+										<td width="129">男</td>
+										<td width="77">年龄：</td>
+										<td>3岁</td>
+									</tr>
+									<tr>
+										<td valign="middle">身份证号：</td>
+										<td>无</td>
+										<td>户口所在地：</td>
+										<td>浙江省杭州市</td>
+										<td>文化程度：</td>
+										<td>硕士</td>
+									</tr>
+									<tr>
+										<td valign="middle">婚姻情况：</td>
+										<td>已婚</td>
+										<td>购房情况：</td>
+										<td>全款购房</td>
+										<td>购车情况：</td>
+										<td>全款购车</td>
+									</tr>
+									<tr>
+										<td valign="middle">借款目的：</td>
+										<td colspan="5">业务扩大</td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td align="center" valign="middle" class="xf_wyjk_taletitle">借款详情对借款用途还款能力的详细说明</td>
+						<td>${romaBid.roma_description}</td>
+					</tr>
+					<tr>
+						<td align="center" valign="middle" class="xf_wyjk_taletitle">必须资料审核科目</td>
+						<td>
+							<table border="0" cellpadding="0" cellspacing="0" width="100%"
+								class="xf_wylc_viewcpms_Tab xf_wylc_viewcpms_Tab2">
+								<tr>
+									<th valign="middle">序号</th>
+									<th>审核科目</th>
+									<th>状态</th>
+									<th>操作</th>
+									<th><b>CBO风控体系审核</b></th>
+								</tr>
+								<tr>
+									<td align="center">1</td>
+									<td align="center">营业执照副本</td>
+									<td align="center">通过审核</td>
+									<td align="center" width="90">不可见</td>
+									<td valign="top" rowspan="${uItems?.size}"
+										class="xf_wylc_l_memhyA_zh">通过</td>
+								</tr>
+							</table></td>
+					</tr>
+					<tr>
+						<td align="center" valign="middle" class="xf_wyjk_taletitle">投标奖励</td>
+						<td>不设置奖励</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<!--借款投标记录 -->
+		<div class="xf_con_wyjk_tentultbody" id="bidInvestRecords"></div>
+		<!--借款提问记录 -->
+		<div class="xf_con_wyjk_tentultbody">新手标请直接联系客服</div>
+		<!--资料补充 -->
+		<div class="xf_con_wyjk_tentultbody">
+			<div style="text-align:center;">#{img
+				src:"${romaBid?.roma_audit_filename}",alt:""}#{/img}</div>
+		</div>
+		<!-- 查看资料弹出层 -->
+		<div id="showitem" class="xf_ht_ttc"></div>
+	</div>
+
+	<!-- 确认投标 -->
+	#{if result>0}
+	<div class="xf_wyjkfb_4_window" id="xf_wyjkfb_4_window">
+		<div class="xf_wyjkfb_4_windowInner xf_wylcfb_4_windowInner">
+			<div class="xf_wyjkfb_4_windowClose"></div>
+			<div class="xf_wyjkfb_4_windowColName">新手标投标成功 !</div>
+		</div>
+	</div>
+	#{/if}
+	<!-- 我要投标 -->
+
+	<div class="xf_wylc_fbjkb clr">
+		
+	</div>
+
+</div>
+<!-- 内容区域 end -->
+<input type="hidden" id="hiddenbidvalue" name="hiddenbidvalue" value=${romaBid?.id} />
+<script>
+
+    	      
+	      $(function(){
+	      
+	      	$("#investRecords").click(function(){
+	      		 var bidId = $("#hiddenbidvalue").val();	      		
+	      		 var pageSize = 10;
+	      		 var pageNum = 1;
+	      		 showBidRecords(pageNum, pageSize,bidId);
+	      	})
+	      	
+	     })
+	      
+	      
+	     
+	      
+	      function showBidRecords(pageNum, pageSize,bidId) {
+	      
+	       var bidId = $("#hiddenbidvalue").val();
+             $.ajax({
+		     	url : "@{viewBidInvestRecords()}",
+			    type : "POST",
+			    data : {
+			     	"pageNum" : pageNum, "pageSize":pageSize, "bidsId":bidId
+			     },
+			    success : function(data) {
+			         
+				     $("#bidInvestRecords").html(data);
+			     },
+			   error : function() {
+				alert("对不起，出现错误!");
+			}
+		});
+
+
+
+	}
+
+
+
+	$(function() {
+		$("a").limit();
+		$("#xf_wyjkfb_4_window").center();
+
+		$(
+				".xf_wyjkfb_4_windowClose,#xf_wyjkfb_4_windowCancle,#xf_con_inputfbqux")
+				.click(function() {
+					$("#xf_wyjkfb_4_window").hide(1500);
+				});
+		//竞拍成功
+		$("#xf_zqzrtb_4_window").center();
+
+		$("#xf_con_inputfbjk").click(function() {
+			$("#xf_wyjkfb_4_window").hide("fast", function() {
+				$("#xf_wyjkfb_4_window").show();
+
+			});
+		});
+		$(".xf_zqzr_4_windowClose").click(function() {
+			$("#xf_zqzrtb_4_window").hide();
+		});
+	});
+
+	function confirmInvest() {
+		var investAmount = $("#investAmountBottom").val();
+       
+		var patrn = /^([1-9]\d*)$/;
+		var flag = patrn.exec(investAmount);
+		
+		if (investAmount.replace(/\s+/g, "") == ""
+				|| null == investAmount.replace(/\s+/g, "")) {
+			alert("对不起！投标金额不能为空！");
+			return;
+		}
+		if (!flag) {
+			alert("对不起！请您输入正整数！");
+			return;
+		}		
+		$("#confirmInvestBottom").submit();
+
+	}
+</script>

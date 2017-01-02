@@ -1,0 +1,36 @@
+<div id="bd" class="bge"> 
+    <div class="wp">
+        <div class="con1">
+            <table class=" bgf">
+                <tr>
+                    <td>
+                        <img src="public/images/newImages/y-cir1.png" alt="">
+                        <h3>高收益灵活投资</h3>
+                        <p>1000元起投</p>
+                        <p>年化收益最高达16%</p>
+                        <p>2-5倍收益超货币基金类产品</p>
+                    </td>
+                    <td>
+                        <img src="public/images/newImages/y-cir2.png" alt="">
+                        <h3>全方位安全保障</h3>
+                        <p>3重风控防线，14项风控标准</p>
+                        <p>强大的安全保障体系</p>
+						<p>100%投资人均获得预期收益，风险准备金及时代偿</p>
+                    </td>
+                    <td>
+                        <img src="public/images/newImages/y-cir3.png" alt="">
+                        <h3>超快速获取收益</h3>
+                        <p>投资当天计息</p>
+						<p>3-180天投资期限</p>
+                        <p>投资结束当天即可提现</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+
+
+
+
+
+

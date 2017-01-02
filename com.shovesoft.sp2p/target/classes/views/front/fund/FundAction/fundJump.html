@@ -1,0 +1,42 @@
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+#{extends 'common/frontMain.html' /} 
+#{set title:currBackstageSet.seoTitle /}
+
+<style>
+ .carImg{  
+   height:150px;
+ }
+.cardiv{
+
+  margin-left:auto;
+  margin-right:auto;
+  padding-top:50px;
+  width:900px;
+  height:800px;
+  font-size:24px; 
+
+} 
+
+</style>
+
+<div>
+   <div class="cardiv">     
+   <img class="carImg" alt="" src="@{'/public/images/car/volov -xc90.png'}">          
+   <img class="carImg" alt="" src="@{'/public/images/car/x5.png'}">           
+   <img class="carImg" alt="" src="@{'/public/images/car/x6.png'}">
+   <img class="carImg" alt="" src="@{'/public/images/car/揽胜 (3)行政版.png'}">          
+   <img class="carImg" alt="" src="@{'/public/images/car/x-5.png'}">                 
+   <img class="carImg" alt="" src="@{'/public/images/car/奔驰cle.png'}">
+   <img class="carImg" alt="" src="@{'/public/images/car/揽胜 (2).png'}">    
+   <img class="carImg" alt="" src="@{'/public/images/car/路地巡洋舰.png'}">
+   <img class="carImg" alt="" src="@{'/public/images/car/叛逆者5.7.png'}">
+   <img class="carImg" alt="" src="@{'/public/images/car/普拉多.png'}">
+   <img class="carImg" alt="" src="@{'/public/images/car/探险者.png'}">
+   <img class="carImg" alt="" src="@{'/public/images/car/威士.png'}">
+   <img class="carImg" alt="" src="@{'/public/images/car/探险者1.png'}">         
+   <img class="carImg" alt="" src="@{'/public/images/car/野马.png'}">   
+    <img class="carImg" alt="" src="@{'/public/images/car/xiangqing.png'}">                
+  </div>  
+</div>

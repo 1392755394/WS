@@ -1,0 +1,74 @@
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+#{extends 'common/frontMain.html' /} 
+#{set title:currBackstageSet.seoTitle+'| 我要理财' /}
+<div class="xf_c_wyjk_1_wyjk">
+	<!--理财流程开始-->
+	#{include "front/invest/InvestAction/homeProcedure.control"/}
+	<!--投标搜索-->
+	#{include "front/invest/InvestAction/homeSearch.control"/}
+	<!-- 排序条件 -->
+	<!-- 搜索结果 -->
+
+	<!--投标搜索 ends-->
+</div>
+
+
+	<div class="clear"></div>
+
+
+
+
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_invest.js'}"></script>
+
+<script>
+    $(function(){
+     
+	  #{list items:pageBean.page, as:'bid'}
+	    $('#loanSchedule'+${bid_index}).css({"width":${bid?.loan_schedule}})
+	  #{/list}
+    })
+
+    function checkLogin(bidId){
+    	var listAction = #{jsAction @front.bid.BidAction.checkUserStatus() /};
+		$.post(listAction(), function(data) {
+			switch(data.status * 1){
+			    case 1:
+			    	collectCurrentBid(bidId);  
+				break;
+				/* 未登录 */
+				case -1: 
+					showDiv($("#xf_logintcc_box"));
+					 return;
+				/* 未激活 */
+				case -2: 
+					$("#userName1").html(data.userName);
+					$("#userName2").html(data.userName);
+					$("#email").html(data.email);
+					showDiv($("#active"));
+					return;
+
+				 case -3: 
+					 collectCurrentBid(bidId);  
+						break;
+			}
+		});	
+      }   
+       
+       
+    function collectCurrentBid(bidId){
+    	var collectBid = #{jsAction @collectBid(':bidId')/}
+    	$.post(collectBid({bidId:bidId}),function(data){
+    	
+    		var arr=eval(data);
+			var result = arr.error.msg;
+			alert(result);
+    	})
+    
+    }
+    
+   
+    
+  
+</script>

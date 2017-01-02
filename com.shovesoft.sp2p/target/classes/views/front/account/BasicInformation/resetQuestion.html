@@ -1,0 +1,82 @@
+#{extends 'common/frontMain.html' /}
+#{set title:'通过邮箱重置安全问题' /}
+<div class="xf_login_centent clr">
+	<div class="xf_login_title xf_login_title2">
+		<span class="xf_login_title_yhdl">重置安全问题</span>
+	</div>
+	<div class="xf_register_email">
+		#{form @saveSafeQuestionByEmail(), id:'resetQuestion'}
+		<div class="xf_con_wyjk_tentultbody">
+			<ul class="xf_login_inputsrul xf_login_inputsrul_zhyhm">
+				<li>
+					<div class="xf_login_inputsrul_l xf_login_inputsrul_lyhm">安全问题1：</div>
+					<div class="xf_login_inputsrul_r">
+						#{select 'secretQuestion1', items:questions, valueProperty:'id', labelProperty:'name', value:1, class:'test', id:'select2' /}
+						<input type="hidden" name="sign" value="${sign}">
+					</div>
+				</li>
+				<li>
+				<div class="xf_login_inputsrul_l xf_login_inputsrul_lyhm">输入答案：</div>
+					<div class="xf_login_inputsrul_r">
+						<input type="text" name="answer1" id="answer1" />
+					</div>
+				</li>
+				
+				<li>
+					<div class="xf_login_inputsrul_l xf_login_inputsrul_lyhm">安全问题2：</div>
+					<div class="xf_login_inputsrul_r">
+						#{select 'secretQuestion2', items:questions, valueProperty:'id', labelProperty:'name', value:1, class:'test', id:'select2' /}
+					</div>
+				</li>
+				<li>
+				<div class="xf_login_inputsrul_l xf_login_inputsrul_lyhm">输入答案：</div>
+					<div class="xf_login_inputsrul_r">
+						<input type="text" name="answer2" id="answer2" />
+					</div>
+				</li>
+				
+				<li>
+					<div class="xf_login_inputsrul_l xf_login_inputsrul_lyhm">安全问题3：</div>
+					<div class="xf_login_inputsrul_r">
+						#{select 'secretQuestion3', items:questions, valueProperty:'id', labelProperty:'name', value:1, class:'test', id:'select2' /}
+					</div>
+				</li>
+				<li>
+				<div class="xf_login_inputsrul_l xf_login_inputsrul_lyhm">输入答案：</div>
+					<div class="xf_login_inputsrul_r">
+						<input type="text" name="answer3" id="answer3" />
+					</div>
+				</li>
+				<li>
+					<div class="xf_login_inputsrul_l xf_login_inputsrul_lyhm">&nbsp;</div>
+					<div class="xf_login_inputsrul_r">
+						<a href="javascript:void(0);" onClick="resetQuestion()" class="xf_con_inputfbjk">设置安全问题</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+		#{/form}
+	</div>
+</div>
+<!-- 底部阴影 -->
+<div class="xf_login_kjyy"></div>
+<script type="text/javascript">
+     function resetQuestion(){
+	   if($("#answer1").val() == ''){
+	        alert("安全问题1不能为空");
+	        return;
+	    }
+       
+       if($("#answer2").val() == ''){
+          alert("安全问题2不能为空");
+          return;
+       }
+       
+       if($("#answer3").val() == ''){
+          alert("安全问题3不能为空");
+          return;
+       }
+	     
+	   $("#resetQuestion").submit();
+    }
+</script>

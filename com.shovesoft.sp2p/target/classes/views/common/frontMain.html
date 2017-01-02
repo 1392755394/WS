@@ -1,0 +1,346 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	
+	%{
+		business.User currUser = business.User.currUser();
+		business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+		String platUrl = constants.Constants.BASE_URL;
+		java.util.Map<String,java.util.List<business.BottomLinks>> bottomLinks = business.BottomLinks.currentBottomlinks();
+	}%
+		<title>#{get 'title' /}</title>
+		<meta name="keywords" content="${currBackstageSet?.seoKeywords}" />
+		<meta name="description" content="${currBackstageSet?.seoDescription}" />
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />		
+		<meta property="wb:webmaster" content="7723251903d116eb" />
+		<meta property="qc:admins" content="17534566166420206375" />
+		
+		<!-- 新加入 -->
+		<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/newstyle/cui.css'}" />	
+		<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/newstyle/lib.css'}" />	
+		<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/newstyle/style.css'}" />
+		<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/site.css'}" />			
+
+		<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/reset.css'}" />
+		<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/temp.css'}" />	
+		<script type="text/javascript" src="@{'/public/javascripts/newjs/jquery1.10.2.min.js'}"></script>	
+		
+							
+	<!-- 增加js -->
+	   	<script type="text/javascript" src="@{'/public/javascripts/koala.min.1.5.js'}"></script>
+		<script type="text/javascript" src="@{'/public/javascripts/jquery-2.0.js'}"></script>						
+		<script type="text/javascript" src="@{'/public/javascripts/jquery.json-2.4.min.js'}"></script>
+		<script type="text/javascript" src="@{'/public/javascripts/xf_front.js'}"></script>
+		<script charset="utf-8" src="@{'public/javascripts/ajaxfileupload.js'}"></script>
+		<script type="text/javascript" src="@{'/public/javascripts/common.js'}"></script>
+		<script type="text/javascript" src="@{'/public/javascripts/jquery.lazyload.min.js'}"></script>
+		<script type="text/javascript" src="@{'/public/javascripts/click_toggle.js'}"></script>	
+	
+	
+	
+	    <script type="text/javascript" src="@{'/public/javascripts/newjs/jquery.validate1.13.js'}"></script>
+	    <script type="text/javascript" src="@{'/public/javascripts/newjs/lib.js'}"></script>
+	    <script type="text/javascript" src="@{'/public/javascripts/newjs/index.js'}"></script>
+	    <script type="text/javascript" src="@{'/public/javascripts/newjs/jquery.SuperSlide.js'}"></script>
+	    <script type="text/javascript" src="@{'/public/javascripts/newjs/jsTimerCountDown.js'}"></script>
+	    <script type="text/javascript" src="@{'/public/javascripts/newjs/circleProgressBar.js'}"></script>
+	
+		
+	</head>
+	<body >
+		<!--头部 start -->
+
+	<!-- logo -->
+<div id="top">
+	<div class="wp">
+		<div class="topr-btn r">
+		  #{if currUser == null}
+		     <a class="blue-a" href="@{front.account.loginAndRegisterAction.login()}" alt="注册">登录</a>　 | <a class="blue-a" href="@{front.account.LoginAndRegisterAction.register()}" alt="东邦">免费注册</a>
+		  	#{/if}
+			#{else}						
+				您好，<a href="@{front.account.AccountHome.home()}" class="blue-a mr5">
+					${currUser?.name}
+				</a>
+				<a href="@{front.account.AccountHome.home()}" class="blue-a ml10 mr5">我的账户</a>
+				<a href="@{front.account.loginAndRegisterAction.logout()}" class="ml10">[退出]</a>　 
+			 #{/else}	
+			
+			<a href="@{front.home.HomeAction.aboutUs(id=16)}" target="_blank" alt="关于我们">关于我们</a> |
+			<a href="@{front.help.HelpCenterAction.index()}" target="_blank" alt="公告">帮助中心</a>
+		</div>
+		咨询热线：
+		<span class="tel">400-681-0113</span>
+	</div>
+</div>
+	
+<div id="hd" style="margin:0;">
+    <div class="wp">
+        <div class="logo l">
+            <a href="http://www.dbp2p.com" alt="东邦易贷首页"><img src="${currBackstageSet.platformLogoFilename}" height="58px" alt="东邦易贷首页"></a>
+        </div>
+        <div class="nav r">
+            <ul>
+                <li class="on"><a alt="东邦易贷" href="@{front.home.HomeAction.home()}">首页</a></li>
+                <li><a alt="我要投资" href="@{front.invest.InvestAction.investHome()}">我要投资</a></li>
+                <li><a alt="我要借款" href="@{front.bid.bidAction.index()}">我要借款</a></li>
+                 <li><a alt="帮助中心" href="@{front.debt.debtAction.debtHome()}">债权转让</a></li>
+                <li><a alt="投资安全保障" href="@{front.principal.PrincipalGuaranteeAction.principalGuaranteeHome()}">安全保障</a></li>
+               
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+ #{doLayout /}
+
+<!-- [end bd] -->
+<div id="fd">
+	<div class="fd-row1">
+    	<div class="wp-foot">
+        	<ul class="fd-menu-l l">
+            	<li class="tit">新手入门</li>
+               		#{list items:bottomLinks?.get("1")}
+					#{if _?.target == 2}
+					<li>#{a href:"${_?.url}",target:"_blank"}${_?.title}#{/a}</li>
+					#{/if}
+					#{else}
+					<li>#{a href:"${_?.url}"}${_?.title}#{/a}</li>
+					#{/else}
+					#{/list}
+           	</ul>
+           	<ul class="fd-menu l">
+             	<li class="tit">我要借款</li>
+             		#{list items:bottomLinks?.get("2")}
+					#{if _?.target == 2}
+					<li>#{a href:"${_?.url}",target:"_blank"}${_?.title}#{/a}</li>
+					#{/if}
+					#{else}
+					<li>#{a href:"${_?.url}"}${_?.title}#{/a}</li>
+					#{/else}
+					#{/list}
+         	</ul>
+           	<ul class="fd-menu l">
+               	<li class="tit">我要理财</li>
+           		#{list items:bottomLinks?.get("3")}
+					#{if _?.target == 2}
+					<li>#{a href:"${_?.url}",target:"_blank"}${_?.title}#{/a}</li>
+					#{/if}
+					#{else}
+					<li>#{a href:"${_?.url}"}${_?.title}#{/a}</li>
+					#{/else}
+					#{/list}
+           	</ul>
+           	
+           	<ul class="fd-menu l">
+               	<li class="tit">关于我们</li>
+       				#{list items:bottomLinks?.get("4")}
+					#{if _?.target == 2}
+					<li>#{a href:"${_?.url}",target:"_blank"}${_?.title}#{/a}</li>
+					#{/if}
+					#{else}
+					<li>#{a href:"${_?.url}"}${_?.title}#{/a}</li>
+					#{/else}
+					#{/list}
+           	</ul>
+           	
+           	 <ul class="fd-menu l">
+               	<li class="tit">帮助中心</li>
+                 	#{list items:bottomLinks?.get("5")}
+					#{if _?.target == 2}
+					<li>#{a href:"${_?.url}",target:"_blank"}${_?.title}#{/a}</li>
+					#{/if}
+					#{else}
+					<li>#{a href:"${_?.url}"}${_?.title}#{/a}</li>
+					#{/else}
+					#{/list}
+           	</ul>
+           	<!--<ul class="fd-menu l">
+           	    <li class="tit">购车专栏</li>
+           	    <li><a href="@{front.fund.FundAction.fundJump()}">查看汽车详情</a></li>
+
+           	</ul>-->
+           	      
+     	</div>
+   	</div>
+
+
+
+       <div class="fd-row2">
+    	<div class="wp"> 
+            <p class="fd-link-icp">
+                                       总部地址：${currBackstageSet?.companyAddress}  | ${currBackstageSet?.siteIcpNumber}
+            </p>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+<div class="right-bar">
+    <ul>
+        <!--<li class="s1"><a target="blank" href="http://weibo.com/u/2317566012?refer_flag=1001030103_&is_hot=1"><span></span>新浪微博</a></li>-->
+        <!--<li class="s2"><a href="javascript:void(0)"><span></span>官方微信<span class="ewm"><img src="@{'/public/images/dongbang.png'}" alt=""></span></a></li>-->
+        <li class="s3"><a target="blank" href="http://shang.qq.com/wpa/qunwpa?idkey=ca05c5d862d92e816100912668e7424887197bac4448722934a93c25e460619f"><span></span>东邦群</a></li>
+        <li class="s3"><a target="blank" href="http://wpa.qq.com/msgrd?v=3&uin=2991015084&site=qq&menu=yes"><span></span>在线客服</a></li>
+        <li class="s5"><a href="javascript:void(0);" class="goTop"><span></span>返回顶部</a></li>
+    </ul>
+</div>
+
+</body>
+
+<script type="text/javascript"> 
+    jQuery(".slideBox").slide({mainCell:".bd ul",effect:"leftLoop",autoPlay:true});
+    jQuery(".ban-new").slide({ mainCell:"#miniNews", effect:"topLoop", autoPlay:true,delayTime:300});
+    jQuery(".picScroll-left").slide({titCell:".hd ul",mainCell:".bd ul",autoPage:true,effect:"leftLoop",autoPlay:true,vis:5,trigger:"click"}); 
+
+	var _hmt = _hmt || [];
+	(function() {
+	  	var hm = document.createElement("script");
+	  	hm.src = "//hm.baidu.com/hm.js?1ee02cfdea90ccc73beadd605b6357a8";
+	  	var s = document.getElementsByTagName("script")[0]; 
+	  	s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+  $(document).keyup(function(event){
+    if(event.keyCode == 13){
+      if(document.activeElement.id == 'code'){
+        login();
+      }
+    }
+  });
+  function vipApply(){
+     if('${currUser?.isEmailVerified}' == 'false') {
+     	 showDiv($("#email_box"));
+     	 return;
+     }
+    showDiv($("#xf_mem_acc_sjvip_tcc"));
+  }
+
+  function login(){
+    var name = $("#name").val();
+           
+    if(name == ''){
+      alert("请输入用户名或邮箱");
+      return;
+    }
+
+    if($("#password").val() == ''){
+      alert("请输入密码");
+      return;
+    }
+
+    if($("#code").val() == ''){
+      alert("请输入验证码");
+      return;
+    }
+    $("#submit").submit();
+  }
+
+  $(function(){
+	$('img.lazy').lazyload({ 
+	  //effect:'fadeIn' 
+	});
+    $("#xf_h_idx_1_hydjfdgdf").limit();
+	   
+    /* 所有继承页面flash.error的值弹框,被继承页面则无需再写 */
+    if('${flash.error}' !='') {
+      alert('${flash?.error}');
+      if('${flash?.emailUrl}' !='') {
+        window.open('${flash?.emailUrl}');
+      }
+    }
+
+    if('${flash.success}' != ''){
+      alert('${flash?.success}');
+    }
+	    	
+    //获取图片验证码
+    if('${currUser?.name}' == '' && '${loginOrRegister}' == '') {
+      var setCode = #{jsAction @front.account.LoginAndRegisterAction.setCode()/}
+      $.post(setCode({}),function(data){
+        var arr=eval(data);
+        var img = arr.img;
+        $("#img").attr("src","@{front.account.LoginAndRegisterAction.getImg()}?id="+img)	
+		$("#randomID").val(img);
+	  });
+	}
+  })
+
+  function change(){
+    var setCode = #{jsAction @front.account.LoginAndRegisterAction.setCode()/}
+	$.post(setCode({}),function(data){
+	  var arr=eval(data);
+	  var img = arr.img;
+	  $("#img").attr("src","@{front.account.LoginAndRegisterAction.getImg()}?id="+img);
+	  $("#randomID").val(img);	
+	});
+  }
+  function AddFavorite(url,title) {
+    var ua = navigator.userAgent.toLowerCase();
+    if(ua.indexOf("msie 8")>-1){
+      external.AddToFavoritesBar(url,title,'');//IE8
+    }else{
+      try {
+        window.external.addFavorite(url, title);
+      } catch(e) {
+        try {
+          window.sidebar.addPanel(title, url, "");//firefox
+        } catch(e) {
+          alert("加入收藏失败，请使用Ctrl+D进行添加");
+        }
+      }
+    }
+  }
+  
+
+  
+  
+</script>
+
+  
+  
+ <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?eb5a55c8355b1625a4490adba66c9f4d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+  
+  
+
+
+</html>

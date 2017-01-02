@@ -1,0 +1,133 @@
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+#{extends 'common/frontMain.html' /} 
+#{set title:currBackstageSet.seoTitle /}
+<script type="text/javascript" src="@{'/public/javascripts/gongyi.js'}"></script> 
+
+<div class="gyzijin">
+  <span style="font-size:16px; color:black">共有</span>
+      #{list items:welLists, as:'bids'}              
+              ${bids?.amount} 
+              <span style="font-size:16px; color:black">元</span>
+              ${bids?.amountPeople}
+              <span style="font-size:16px; color:black">人参与到东邦公益</span>
+       #{/list} 
+
+</div>
+<div class="common">
+  <ul>
+    <li class="listbox mr20">
+      <div class="listimg"> <a href="@{front.welfare.welfareAction.welfareDonat()}"target="_blank"><img src="@{'/public/images/01.jpg'}" class="attachment-thumbnail wp-post-image" alt="WordPress中文博客主题Truepixel" /></a>
+        <div class="summary">
+          <div class="summarytxt">
+          <p>我要捐款</p>
+          </div>
+        </div>
+      </div>
+      <div class="listinfo">
+        <div class="listtitle"><a href="@{front.welfare.welfareAction.welfareDonat()}"  target="_blank">东邦公益，我要捐款</a></div>
+        <div class="listtag"><a href="@{front.welfare.welfareAction.welfareDonat()}" rel="tag">东邦公益</a><a href="@{front.welfare.welfareAction.welfareDonat()}" rel="tag">捐款</a></div>
+        <div class="listdate">2020-08-25</div>
+        <div class="listview">6253</div>
+        <div class="listcomment">16</div>
+        <div class="listdemo"><a href="@{front.welfare.welfareAction.welfareDonat()}" rel="external nofollow" target="_blank">捐款</a></div>
+      </div>
+    </li>
+ 
+ 
+ 
+ 
+ 
+    <li class="listbox mr20">
+      <div class="listimg"> <a href="@{front.welfare.welfareAction.welfarePeople()}" ><img src="@{'/public/images/02.jpg'}" class="attachment-thumbnail wp-post-image" alt="WordPress中文博客主题Truepixel" /></a>
+        <div class="summary">
+          <div class="summarytxt">
+            <p>查看捐款名单</p>
+          </div>
+        </div>
+      </div>
+      <div class="listinfo">
+        <div class="listtitle"><a href="@{front.welfare.welfareAction.welfarePeople()}" >东邦公益，查看参与公益人的名单</a></div>
+        <div class="listtag"><a href="@{front.welfare.welfareAction.welfarePeople()}" rel="tag">东邦公益</a><a href="@{front.welfare.welfareAction.welfarePeople()}" rel="tag">名单</a></div>
+        <div class="listdate">2020-08-25</div>
+        <div class="listview">6253</div>
+        <div class="listcomment">16</div>
+        <div class="listdemo"><a href="@{front.welfare.welfareAction.welfarePeople()}" rel="external nofollow" >名单</a></div>
+      </div>
+    </li>
+          
+	<li class="listbox mr20">
+      <div class="listimg"> <a href="@{front.welfare.welfareAction.welfareUbar()}"  target="_blank"><img src="@{'/public/images/03.jpg'}" class="attachment-thumbnail wp-post-image"  /></a>
+        <div class="summary">
+          <div class="summarytxt">  
+            <p>
+                                                    东邦公益细则       
+              </p>
+          </div>
+        </div>
+      </div>
+      <div class="listinfo">
+        <div class="listtitle"><a href="@{front.welfare.welfareAction.welfareUbar()}"  target="_blank">东邦公益细则</a></div>
+        <div class="listdate">2020-08-25</div>
+        <div class="listview">6253</div>
+        <div class="listcomment">16</div>
+        <div class="listdemo"><a href="@{front.welfare.welfareAction.welfareUbar()}" rel="external nofollow" target="_blank">公益规则</a></div>
+      </div>
+    </li>
+    
+	<li class="listbox mr20">
+      <div class="listimg"> <a href="@{front.welfare.welfareAction.welfareYaan()}"  target="_blank"><img src="@{'/public/images/05.jpg'}" class="attachment-thumbnail wp-post-image"  /></a>
+        <div class="summary">
+          <div class="summarytxt">
+            <p>东邦公益雅安专栏</p>
+          </div>
+        </div>
+      </div>
+      <div class="listinfo">
+        <div class="listtitle"><a href="@{front.welfare.welfareAction.welfareYaan()}"  target="_blank">东邦公益雅安专栏</a></div>
+        <div class="listdate">2020-08-25</div>
+        <div class="listview">6253</div>
+        <div class="listcomment">16</div>
+        <div class="listdemo"><a href="@{front.welfare.welfareAction.welfareYaan()}" rel="external nofollow" target="_blank">雅安</a></div>
+      </div>
+    </li>
+    
+    <li class="listbox mr20">
+      <div class="listimg"> <a href="@{front.welfare.welfareAction.welfareObject()}"  target="_blank"><img src="@{'/public/images/06.jpg'}" class="attachment-thumbnail wp-post-image"  /></a>
+        <div class="summary">
+          <div class="summarytxt">
+            <p>抗战老兵</p>
+          </div>
+        </div>
+      </div>
+      <div class="listinfo">
+        <div class="listtitle"><a href="@{front.welfare.welfareAction.welfareObject()}"  target="_blank">抗战老兵</a></div>
+        <div class="listdate">2015-08-25</div>
+        <div class="listview">6253</div>
+        <div class="listcomment">16</div>
+        <div class="listdemo"><a href="@{front.welfare.welfareAction.welfareObject()}" rel="external nofollow" target="_blank">扶住对象</a></div>
+      </div>
+    </li>
+    <li class="listbox mr20">
+      <div class="listimg"> <a href="@{front.welfare.welfareAction.welfareActivty()}"  target="_blank"><img src="@{'/public/images/07.jpg'}" class="attachment-thumbnail wp-post-image" /></a>
+        <div class="summary">
+          <div class="summarytxt">
+            <p>东邦公益活动</p>
+          </div>
+        </div>
+      </div>
+      <div class="listinfo">
+        <div class="listtitle"><a href="@{front.welfare.welfareAction.welfareActivty()}"  target="_blank">东邦公益活动</a></div>
+        <div class="listdate">2020-08-25</div>
+        <div class="listview">6253</div>
+        <div class="listcomment">16</div>
+        <div class="listdemo"><a href="@{front.welfare.welfareAction.welfareActivty()}" rel="external nofollow" target="_blank">活动</a></div>
+      </div>
+    </li>
+  </ul>
+  
+</div>
+
+
+

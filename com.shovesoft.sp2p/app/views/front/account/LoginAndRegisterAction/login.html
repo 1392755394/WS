@@ -1,0 +1,190 @@
+#{extends 'common/frontMain.html' /}
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+#{set title:currBackstageSet.seoTitle+'|登录' /}
+<div class="xf_login_centent clr">
+	<!-- 登录 -->
+	<div class="xf_login_centent_l">
+		<div class="xf_login_centent_rightbj"></div>
+		<div class="xf_login_title">
+			<span class="xf_login_title_yhdl">用户登录</span>
+			<a href="@{front.account.LoginAndRegisterAction.register}"
+				class="xf_login_title_zcxyh">注册新用户</a>
+		</div>
+		<div class="xf_login_inputsr">
+			#{form @front.account.loginAndRegisterAction.logining(), id:'submit'}
+			<ul class="xf_login_inputsrul">
+			   
+				<li>
+					<div class="xf_login_inputsrul_l">
+						用户名：
+					</div>
+					<div class="xf_login_inputsrul_r">
+							<input type="text" id="name" name="name"
+								value="${flash?.name}" class="xf_login_shurk" placeholder="手机/邮箱/用户名" >
+								<span class="xf_register_intext" id="s_userName"></span>
+							<a href="@{front.account.loginAndRegisterAction.findBackUsernameByEmail()}" class="xf_login_inputspan" >忘记用户名</a>
+					</div>
+				</li>
+	
+				<li>
+					<div class="xf_login_inputsrul_l">
+						密码：
+					</div>
+					<div class="xf_login_inputsrul_r">
+							<input type="password" id="password" name="password" value="${flash?.password}" class="xf_login_shurk">
+							<span class="xf_register_intext" id="s_password"></span>
+							<a href="@{front.account.loginAndRegisterAction.resetPasswordByEmail()}" class="xf_login_inputspan">忘记密码</a>
+					</div>
+				</li>
+				<li>
+					<div class="xf_login_inputsrul_l">
+						验证码：
+					</div>
+					<div class="xf_login_inputsrul_r">
+						<input class="xf_login_yzm" type="text" id="code" name="code" value="${flash?.code}" />
+						<span class="xf_register_intext" id="s_code"></span>
+						<input type="hidden" name="randomID" id="randomID" />
+						<img src="" class="xf_login_yzmimg" id="img" onclick="change()" width="75px" height="32px">
+						<a onclick="change()" class="xf_login_inputspan">刷新</a>
+					</div>
+					<span id="s_code"></span>
+				</li>
+				<li class="xf_login_xxhelp">
+					<div class="xf_login_inputsrul_l">
+						&nbsp;
+					</div>
+					<div class="xf_login_inputsrul_r">
+						<b class="xf_login_text_cg"></b>
+						<span class="xf_login_text_cgsp">您的信息将通过128位SGC加密保护数据传输安全</span>
+					</div>
+				</li>
+				<li>
+					<div class="xf_login_inputsrul_l">
+						&nbsp;
+					</div>
+					<div class="xf_login_inputsrul_r">
+					<a onClick="login()" class="xf_con_inputfbjk">安全登录</a>
+					</div>
+				</li>
+			</ul>
+			#{/form}
+		</div>
+	</div>
+	
+</div>
+<script type="text/javascript">
+		$(function(){
+		    var setCode = #{jsAction @front.account.loginAndRegisterAction.setCode()/}
+		    
+			$.post(setCode({}),function(data){
+				var arr=eval(data);
+				var img = arr.img;
+				$("#img").attr("src","@{front.account.loginAndRegisterAction.getImg()}?id="+img);
+				//得到验证码的值
+				//alert("后台返回验证码的值："+img);
+				//6d87679f-017e-49b5-9ae9-4c11e2a198f7
+				$("#randomID").val(img);
+			});
+		});
+	/*	$(document).keyup(function(event){
+			  if(event.keyCode == 13){
+			     login();
+			 }
+		});
+		
+	   function change(){
+			var setCode = #{jsAction @setCode()/}
+			$.post(setCode({}),function(data){
+			var arr=eval(data);
+			var img = arr.img;
+			$("#img").attr("src","@{getImg()}?id="+img)	
+			$("#randomID").val(img);
+			});
+		}
+
+      var blug = false;
+       $(document).ready(function(){
+	      $("#name").blur(function(){ 
+		     if(this.value == ""){
+		           $("#s_userName").html("请输入用户名");
+			 }else{
+		        var hasNameExist = #{jsAction @hasNameExist(':name')/}
+			    $.post(hasNameExist({name:encodeURI($("#name").val())}),function(data){
+				 var arr=eval(data);
+				 if(arr.error.code != -2){
+			           $("#s_userName").html("该用户名不存在");
+			           blug = true;
+				}else{ 
+		               $("#s_userName").html(""); 
+		               blug = false;
+		            }
+		          });
+			   }
+	       });
+       });
+
+      var blugCode = false;
+       $(document).ready(function(){
+	   $("#code").blur(function(){ 
+		     if(this.value == ""){
+		           $("#s_code").html("验证码不能为空");
+		           return;
+			 }*/
+			 /*else{
+		        var listAction = #{jsAction @front.account.LoginAndRegisterAction.codeReturn(':codeImg') /};
+		   		var codeImg =  $("#randomID").val();
+		   		$.post(listAction({codeImg:codeImg}), function(data) {
+		   			var arr = eval(data);
+					var results = arr.randomID;
+					var code = $("#code").val();
+		   			if(results.toLowerCase() != code.toLowerCase()){
+				           $("#s_code").html("验证码输入错误");
+				           blugCode = true;
+					}else{ 
+			               $("#s_code").html(""); 
+			               blugCode = false;
+			            }
+		   		});		
+
+			   }
+	       });
+       });*/
+    /*   
+    function login(){
+    	var name = $("#name").val();
+        
+        if($("#name").val() == ''){
+        	alert("请输入用户名");
+        	return;
+         } 
+
+        if($("#password").val() == ''){
+        	alert("请输入密码");
+        	return;
+        } 
+
+        if($("#code").val() == ''){
+        	alert("请输入验证码");
+        	return;
+        }  
+
+        if(blug == true){
+        	alert("用户名不存在");
+        //	location.reload();
+        	return;
+        }
+        
+		 if(blugCode == true){
+        	$("#s_code").html("");
+        	$("#s_code").html("验证码输入错误");
+        	location.reload();
+        	return;
+        }
+      
+        $("#submit").submit();
+      }
+*/
+      
+</script>

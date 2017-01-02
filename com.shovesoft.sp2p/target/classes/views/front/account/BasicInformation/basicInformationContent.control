@@ -1,0 +1,279 @@
+<!-- 基本资料 -->
+<div class="xf_mem_Account xf_mem_passage">
+	<h3 class="xf_mem_accout_title xf_mem_accout_tijbzl">
+		<span class="xf_mem_accout_jbzl">资料设置</span>
+		#{if !user.isAddBaseInfo} 
+		<a class="xf_mem_accout_jbzl2" href="javascript:void(0)" onclick="edit()">编辑</a>
+		<a class="xf_mem_accout_jbzl2" href="javascript:void(0)" onclick="save()">保存</a>
+		#{/if}
+	</h3>
+	#{if !user.isAddBaseInfo} 
+	#{form @front.account.BasicInformation.saveInformation(), id:'basicInformation'}
+	<table border="0" cellpadding="0" cellspacing="0" width="738" class="xf_memjbzl_table">
+		<tr>
+			<td width="302">
+				<span class="xf_jbzl_stitle"><label class="xf_jbzl_stitle_red">*</label>真实姓名：</span>
+  				<input type="text" name="realityName" id="realityName" value="${flash?.realityName}" class="xf_jbzl_input"> 
+			</td>
+			<td>
+				<span class="xf_jbzl_stitle"><label class="xf_jbzl_stitle_red">*</label>性别：</span>
+				<select name="sex" class="xf_jbzl_selectAge">   
+				   #{if flash?.sex == '1'}
+				   <option value="0" >--请选择--</option> 	
+			       <option value="1" selected>男</option> 
+			       <option value="2" >女</option>
+			      #{/if}
+			      #{elseif flash?.sex == '2'}
+			      <option value="0" >--请选择--</option> 	
+			      <option value="1">男</option> 
+			       <option value="2" selected>女</option>
+			       #{/elseif}
+			        #{elseif flash?.sex == '3'}
+			        <option value="0" >--请选择--</option> 	
+			      <option value="1">男</option> 
+			       <option value="2">女</option>
+			        #{/elseif}
+			       #{else}
+			       <option value="0" selected>--请选择--</option> 	
+			      <option value="1">男</option> 
+			       <option value="2">女</option>
+			       #{/else}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<span class="xf_jbzl_stitle"><label class="xf_jbzl_stitle_red">*</label>年龄：</span>
+				<input class="xf_jbzl_input" name="age" id="age" value="${flash?.age}">
+			</td>
+			#{if null != user?.idNumber && user?.idNumber != ""}
+			<td>
+				<span class="xf_jbzl_stitle"><label class="xf_jbzl_stitle_red">*</label><label>身份证号码：</label></span>
+				<input class="xf_jbzl_input" id="idNumber" name="idNumber" size="10" value="${user?.idNumber}" readonly>
+			</td>
+			#{/if}
+			#{else}
+			<td>
+				<span class="xf_jbzl_stitle"><label class="xf_jbzl_stitle_red">*</label><label>身份证号码：</label></span>
+				<input class="xf_jbzl_input" id="idNumber" name="idNumber" size="10" value="${flash?.idNumber}">
+			</td>
+			#{/else}
+		</tr>
+		<tr>
+			<td colspan="2">
+				<span class="xf_jbzl_stitle"><label class="xf_jbzl_stitle_red">*</label>户口所在地：</span>
+				#{select 'province', items:provinces, valueProperty:'id', labelProperty:'name', value:flash?.province, class:'xf_jbzl_selectAge', id:'province' /}
+				#{select 'city', items:cityList, valueProperty:'id', labelProperty:'name', value:flash?.city, class:'xf_jbzl_selectAge', id:'city' /}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<span class="xf_jbzl_stitle"><label class="xf_jbzl_stitle_red">*</label>文化程度：</span>
+				#{select 'education', items:educations, valueProperty:'id', labelProperty:'name', value:flash?.education, class:'xf_jbzl_selectAge', id:'education' /}
+				
+			</td>
+			<td>
+				<span class="xf_jbzl_stitle"><label class="xf_jbzl_stitle_red">*</label>婚姻情况：</span>
+				#{select 'marital', items:maritals, valueProperty:'id', labelProperty:'name', value:flash?.marital, class:'xf_jbzl_selectAge', id:'marital' /}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<span class="xf_jbzl_stitle"><label class="xf_jbzl_stitle_red">*</label>购车情况：</span>
+				#{select 'car', items:cars, valueProperty:'id', labelProperty:'name', value:flash?.car, class:'xf_jbzl_selectAge', id:'car' /}
+			</td>
+			<td>
+				<span class="xf_jbzl_stitle"><label class="xf_jbzl_stitle_red">*</label>购房情况：</span>
+				#{select 'house', items:houses, valueProperty:'id', labelProperty:'name', value:flash?.house, class:'xf_jbzl_selectAge', id:'house' /}
+			</td>
+		</tr>
+	</table>
+	#{/form}
+	#{/if}
+	#{else}
+		#{form @front.account.BasicInformation.saveInformation(), id:'basicInformation'}
+		<table border="0" cellpadding="0" cellspacing="0" width="738" class="xf_memjbzl_table">
+		<tr>
+			<td width="302">
+				<span class="xf_jbzl_stitle">真实姓名：</span>
+  				<input type="text" name="realityName" id="realityName" value="${user.realityName}" class="xf_jbzl_input"> 
+			</td>
+			<td>
+				<span class="xf_jbzl_stitle">性别：</span>
+				<select name="sex" class="xf_jbzl_selectAge" value="${user?.sex}">   
+				   #{if user?.sex == "男"}
+				   <option value="0" >--请选择--</option> 	
+			       <option value="1" selected>男</option> 
+			       <option value="2" >女</option>
+			      #{/if}
+			      #{elseif user?.sex == '女'}
+			      <option value="0" >--请选择--</option> 	
+			      <option value="1">男</option> 
+			       <option value="2" selected>女</option>
+			       #{/elseif}
+			       #{else}
+			       <option value="0" selected>--请选择--</option> 	
+			      <option value="1">男</option> 
+			       <option value="2">女</option>
+			       #{/else}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<span class="xf_jbzl_stitle">年龄：</span>
+				#{if user?.age==-1}
+				<input class="xf_jbzl_input" name="age" id="age" value="">
+				#{/if}
+				#{else}
+				<input class="xf_jbzl_input" name="age" id="age" value="${user?.age}">
+				#{/else}
+			</td>
+			<td>
+			
+				<span class="xf_jbzl_stitle">身份证号码：</span>
+				<input class="xf_jbzl_input" id="idNumber" name="idNumber" value="${user?.idNumber}">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<span class="xf_jbzl_stitle">户口所在地：</span>
+				#{select 'xf_jbzl_selectAge', items:provinces, valueProperty:'id', labelProperty:'name', value:user?.provinceId, class:'xf_jbzl_selectAge', id:'province' /}
+				#{select 'city', items:cityList, valueProperty:'id', labelProperty:'name', value:user?.cityId, class:'xf_jbzl_selectAge', id:'city' /}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<span class="xf_jbzl_stitle">文化程度：</span>
+				#{select 'education', items:educations, valueProperty:'id', labelProperty:'name', value:user?.educationId, class:'xf_jbzl_selectAge', id:'education' /}
+				
+			</td>
+			<td>
+				<span class="xf_jbzl_stitle">婚姻情况：</span>
+				#{select 'marital', items:maritals, valueProperty:'id', labelProperty:'name', value:user?.maritalId, class:'xf_jbzl_selectAge', id:'marital' /}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<span class="xf_jbzl_stitle">购车情况：</span>
+				#{select 'car', items:cars, valueProperty:'id', labelProperty:'name', value:user?.carId, class:'xf_jbzl_selectAge', id:'car' /}
+			</td>
+			<td>
+				<span class="xf_jbzl_stitle">购房情况：</span>
+				#{select 'house', items:houses, valueProperty:'id', labelProperty:'name', value:user?.houseId, class:'xf_jbzl_selectAge', id:'house' /}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<span class="xf_jbzl_stitle">手&nbsp;机&nbsp;</span>
+				<input class="xf_jbzl_input" name="mobile1" value="${user?.mobile}">
+			</td>
+			
+		</tr>
+		<tr>
+			<td colspan="2">
+				<span class="xf_jbzl_stitle">邮&nbsp;&nbsp;&nbsp;&nbsp;箱：</span>
+				<input class="xf_jbzl_input"  name="email2" value="${user?.email}">
+			</td>
+		</tr>
+	</table>
+	#{/form}
+	#{/else}
+</div>
+<script >
+
+	$(function() {
+		$("form :input").attr("disabled",true);
+		$("#m1").attr("disabled",true);
+		$("#m2").attr("disabled",true);
+		
+		if('${user.isAddBaseInfo}' == 'false') {
+			if('${flash?.city}'==0) {
+			$("#province").append("<option value='0' selected>--请选择--</option>");
+			$("#city").append("<option value='0' selected>--请选择--</option>");
+			
+			}
+			
+			if('${flash?.education}'==0) {
+				$("#education").append("<option value='0' selected>--请选择--</option>");
+			}
+			
+			if('${flash?.marital}'==0) {
+				$("#marital").append("<option value='0' selected>--请选择--</option>");
+			}
+			
+			if('${flash?.car}'==0) {
+				$("#car").append("<option value='0' selected>--请选择--</option>");
+			}
+			
+			if('${flash?.house}'==0) {
+				$("#house").append("<option value='0' selected>--请选择--</option>");
+			}
+		}
+		
+	})
+	
+	$("#province").change(function(){
+		var selectVal = $(this).children('option:selected').val();
+		var jsAction = #{jsAction @Application.getCity(":provinceId")/}
+		$.post(jsAction({provinceId:selectVal}),function(data) {
+			var cityList = [];
+			for(var i = 0; i < data.length; i ++){
+				cityList.push("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+			}
+			$("#city").html(cityList);
+		});
+	});
+	
+	
+	function edit() {
+		$("form :input").attr("disabled",false);
+		$("#m1").attr("disabled",false);
+		$("#m2").attr("disabled",false);
+	}
+	
+	function save() {
+	
+	    if($("#realityName").val().trim() == ''){
+	       alert("真实姓名不能为空");
+	       return;
+	    }
+	    
+	    if($("#age").val().trim() == ''){
+	       alert("年龄不能为空");
+	       return;
+	    }
+	    
+	    if($("#province").val() == 0) {
+	       alert("请选择户口所在地");
+	       return;
+	    }
+	    
+	    if($("#education").val() == 0) {
+	       alert("请选择文化程度");
+	       return;
+	    }
+	    
+	    if($("#marital").val() == 0) {
+	       alert("请选择婚姻状况");
+	       return;
+	    }
+	    
+	    if($("#car").val() == 0) {
+	       alert("请选择购车情况");
+	       return;
+	    }
+	    
+	    if($("#house").val() == 0) {
+	       alert("请选择购房情况");
+	       return;
+	    }
+	    
+	    if($("#idNumber").val().trim() == ''){
+	       alert("身份证号码不能为空");
+	       return;
+	    }
+  
+		$("#basicInformation").submit();
+	}
+</script>

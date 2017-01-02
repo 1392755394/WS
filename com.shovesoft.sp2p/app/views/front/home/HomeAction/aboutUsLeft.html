@@ -1,0 +1,33 @@
+
+
+<div class="xf_con_mem_nav"></div>
+
+<!-- 左边导航区域 -->
+<div class="xf_con_wyjk_left">
+	<h2 class="xf_con_mem_lefth2">
+		关于我们
+	</h2>
+	<ul class="xf_con_wyjk_leftul xf_con_suba_leftul" id="gywm">
+	#{list items:bottomLinks , as:'bootLinks'}
+		<li>
+			<a class="xf_mem_l_title" href="@{front.home.HomeAction.aboutUs(bootLinks?.id)}">${bootLinks?.name} </a><a
+				class="xf_mem_r_more xf_mem_r_ishot2"></a>
+		</li>
+	#{/list}	
+	
+	#{list items:types, as:'type'}
+		<li>
+			<a class="xf_mem_l_title" href="@{front.home.HomeAction.aboutUs(type?.id)}">${type?.name} </a><a
+				class="xf_mem_r_more xf_mem_r_ishot2"></a>
+		</li>
+	#{/list}	
+	
+	</ul>
+</div>
+<script type="text/javascript">
+<!--
+	$(function(){
+		$("#aboutUs" + ${id}).addClass("xf_con_wyjk_leftliisshow");
+	});
+//-->
+</script>

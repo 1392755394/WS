@@ -1,0 +1,47 @@
+
+#{list products}
+<div class="xf_c_wyjk_2_jkcpItems2">
+
+	<div class="xf_c_wyjk_2_jkcpColName xf_c_wyjk_2_jkcpJzjkb">
+	    <img src ="${_?.nameImageFilename}" style="width:300px;height:60px;border-radius:8px"></img>
+		
+	</div>
+	<div class="xf_c_wyjk_2_jkcpCont">
+		<div class="xf_c_wyjk_2_jkcpShrq">
+			<div class="xf_c_wyjk_2_shrqTitle">
+				适合人群：
+			</div>
+			<div class="xf_c_wyjk_2_shrqText">
+				<p>
+					${_?.fitCrowd}
+				</p>
+			</div>
+		</div>
+		<div class="xf_c_wyjk_2_jkcpSqtj">
+			<div class="xf_c_wyjk_2_sqtjTitle">
+				申请条件：
+			</div>
+			<div class="xf_c_wyjk_2_sqtjText">
+				<p>
+					${_?.applicantCondition}
+				</p>
+			</div>
+		</div>
+		<div class="xf_c_wyjk_2_jkcpJked">
+			<div class="xf_c_wyjk_2_jkedTitle">
+				借款额度：${_?.minAmount?.format('###,##0.00')}-${_?.maxAmount?.format('###,##0.00')} 元
+
+				<br />
+
+				<a href="@{front.bid.bidAction.detail(_?.id)}" target="_blank">查看产品详细资料</a>
+			</div>
+		</div>
+		<div class="xf_c_wyjk_2_jkcpLjsq">
+			<div class="xf_c_wyjk_2_ljsqTitle">
+				<a href="@{applyNow(_?.id, 0, 1)}" target="_blank">立即申请</a>
+			</div>
+		</div>
+	</div>
+
+</div>
+#{/list}

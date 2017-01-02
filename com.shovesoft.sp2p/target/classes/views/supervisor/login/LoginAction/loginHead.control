@@ -1,0 +1,8 @@
+ %{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+<div class="xfht_logobj">
+  <div class="xfht_logo">
+    #{img src:"${currBackstageSet?.supervisorPlatformLog}", alt:"LOGO"}#{/img}
+  </div>
+</div>

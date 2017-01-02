@@ -1,0 +1,291 @@
+<div class="xf_bjbz_banner">
+	#{if ads[0]?.is_link_enabled}
+	#{if ads[0]?.target == 2}
+		<a href="${ads[0]?.url}" target="_blank">
+			#{img src:"${ads[0]?.image_filename}",alt:"",width:"1000",height:"125px"}#{/img}
+		</a>
+	#{/if}
+	#{else}
+		<a href="${ads[0]?.url}"/>
+			#{img src:"${ads[0]?.image_filename}",alt:"",width:"1000",height:"125px"}#{/img}
+		</a>
+	#{/else}
+	#{/if}
+	#{else}
+		#{img src:"${ads[0]?.image_filename}",alt:"",width:"1000",height:"125px"}#{/img}
+	#{/else}
+</div>
+<!-- 官方公告top -->
+
+<!-- 互联网金融 -->
+<div class="xf_cfzx_gfgg clr">
+	<div class="xf_cfzx_gfgg_right xf_cfzx_gfgg_right_two">
+		<div class="xf_cfzx_gfgg_right_t">
+		    #{if types?.size > 1}
+			<div class="xf_cfzx_gfgg_right_t_l">${types?.get(1)?.name}</div>
+			<div class="xf_cfzx_gfgg_right_t_r">
+				<a target="_blank" href="@{front.wealthinfomation.WealthInfomationAction.newsList(types?.get(1)?.id)}">更多</a>
+			</div>
+			#{/if}
+		</div>
+		<ul class="xf_cfzx_gfgg_right_ul">
+		#{list items:lt1, as:'leftNews1'}
+			<li><a href="@{front.wealthinfomation.WealthInfomationAction.newDetails(leftNews1?.id)}"> <b class="xf_cfzx_gfgg_right_lb">·</b> 
+				<span class="xf_cfzx_gfgg_right_lspan" limit="12">${leftNews1?.title}</span>
+				<span class="xf_cfzx_gfgg_right_rspan">${leftNews1?.time?.format('yyyy-MM-dd')}</span> </a>
+			</li>
+		#{/list}
+		</ul>
+	</div>
+	<div class="xf_cfzx_gfgg_right xf_cfzx_gfgg_right_thr">
+		<div class="xf_cfzx_gfgg_right_t">
+		    #{if types?.size > 2}
+			<div class="xf_cfzx_gfgg_right_t_l">${types?.get(2)?.name}</div>
+			<div class="xf_cfzx_gfgg_right_t_r">
+				<a target="_blank" href="@{front.wealthinfomation.WealthInfomationAction.newsList(types?.get(2)?.id)}">更多</a>
+			</div>
+			#{/if}
+		</div>
+		<ul class="xf_cfzx_gfgg_right_ul">
+		#{list items:lt2, as:'leftNews2'}
+			<li><a href="@{front.wealthinfomation.WealthInfomationAction.newDetails(leftNews2?.id)}"> <b class="xf_cfzx_gfgg_right_lb">·</b> 
+				<span class="xf_cfzx_gfgg_right_lspan" limit="12">${leftNews2?.title}</span>
+				<span class="xf_cfzx_gfgg_right_rspan">${leftNews1?.time?.format('yyyy-MM-dd')}</span> </a>
+			</li>
+		#{/list}			
+		</ul>
+	</div>
+	<div class="xf_cfzx_gfgg_right xf_cfzx_gfgg_right_fur">
+		<div class="xf_cfzx_gfgg_right_t">
+			<div class="xf_cfzx_gfgg_right_t_l">理财风云榜</div>
+			<div class="xf_cfzx_gfgg_right_t_r">
+				<a href="@{front.home.HomeAction.moreInvest()}" target="_blank">更多</a>
+			</div>
+		</div>
+		<div class="xf_cfzx_gfgg_right_table">
+			<table border="0" cellpadding="0" cellspacing="0" width="100%">
+				<tr>
+					<th>排名</th>
+					<th>用户名</th>
+					<th>投资金额</th>
+					<th>收益率</th>
+				</tr>
+				
+				#{list items:investBillboard, as:'board'}
+				<tr>
+					#{if board_index == 1 || board_index ==2 || board_index == 3}
+					<td align="center"><span class="xf_cfzx_gfgg_order">${board_index}</span>
+					</td>
+					#{/if}
+					#{else}
+					<td align="center"><span class="xf_cfzx_gfgg_order xf_cfzx_gfgg_order_two">${board_index}</span>
+					</td>
+					#{/else}
+					<td align="center">${board?.name?.asterisk()}</td>
+					<td align="center"><span class="xf_cfzx_gfgg_tzje">￥#{format money:board?.corpus}#{/format}</span>
+					</td>
+					<td align="center">${(board?.interest*100/board?.corpus)?.format('0.00')}%</td>
+				</tr>
+				#{/list}
+			</table>
+		</div>
+	</div>
+</div>
+<!--本金保障banner
+<div class="xf_bjbz_banner_two">
+	#{if ads[1]?.is_link_enabled}
+	#{if ads[1]?.target == 2}
+		<a href="${ads[1]?.url}" target="_blank">
+			#{img class:"lazy", data_original:"${ads[1]?.image_filename}", src:"/public/images/loading.gif",alt:"",width:"1000"}#{/img}
+		</a>
+	#{/if}
+	#{else}
+		<a href="${ads[1]?.url}"/>
+			#{img class:"lazy", data_original:"${ads[1]?.image_filename}", src:"/public/images/loading.gif",alt:"",width:"1000"}#{/img}
+		</a>
+	#{/else}
+	#{/if}
+	#{else}
+		#{img class:"lazy", data_original:"${ads[1]?.image_filename}", src:"/public/images/loading.gif",alt:"",width:"1000"}#{/img}
+	#{/else}
+	
+</div>
+-->
+<!-- 借款技巧 -->
+<div class="xf_cfzx_gfgg clr">
+	<div class="xf_cfzx_gfgg_left">
+		<div class="xf_cfzx_gfgg_right xf_cfzx_gfgg_right_two">
+			<div class="xf_cfzx_gfgg_right_t">
+			    #{if types?.size > 3}
+				<div class="xf_cfzx_gfgg_right_t_l">${types?.get(3)?.name}</div>
+				<div class="xf_cfzx_gfgg_right_t_r">
+					<a target="_blank" href="@{front.wealthinfomation.WealthInfomationAction.newsList(types?.get(3)?.id)}">更多</a>
+				</div>
+				#{/if}
+			</div>
+			<ul class="xf_cfzx_gfgg_right_ul">
+			#{list items:lb1, as:'downNews1'}
+				<li><a target="_blank" href="@{front.wealthinfomation.WealthInfomationAction.newDetails(downNews1?.id)}"> <b class="xf_cfzx_gfgg_right_lb">·</b> 
+					<span class="xf_cfzx_gfgg_right_lspan" limit="12">${downNews1?.title}</span>
+					<span class="xf_cfzx_gfgg_right_rspan">${leftNews1?.time?.format('yyyy-MM-dd')}</span> </a>
+			    </li>
+			    #{/list}
+			</ul>
+		</div>
+		<div class="xf_cfzx_gfgg_right xf_cfzx_gfgg_right_thr">
+			<div class="xf_cfzx_gfgg_right_t">
+			    #{if types?.size > 4}
+				<div class="xf_cfzx_gfgg_right_t_l">${types?.get(4)?.name}</div>
+				<div class="xf_cfzx_gfgg_right_t_r">
+					<a target="_blank" href="@{front.wealthinfomation.WealthInfomationAction.newsList(types?.get(4)?.id)}">更多</a>
+				</div>
+				#{/if}
+			</div>
+			<ul class="xf_cfzx_gfgg_right_ul">
+				#{list items:lb2, as:'downNews2'}
+				<li><a target="_blank" href="@{front.wealthinfomation.WealthInfomationAction.newDetails(downNews2?.id)}"> <b class="xf_cfzx_gfgg_right_lb">·</b> 
+				    <span class="xf_cfzx_gfgg_right_lspan" limit="12">${downNews2?.title}</span>
+				    <span class="xf_cfzx_gfgg_right_rspan">${leftNews1?.time?.format('yyyy-MM-dd')}</span> </a>
+			    </li>
+			    #{/list}
+			</ul>
+		</div>
+		<div class="clr"></div>
+	
+	</div>
+	<div class="xf_cfzx_gfgg_right xf_cfzx_gfgg_right_fare">
+		<div class="xf_cfzx_gfgg_right_t">
+		    #{if types?.size > 5}
+			<div class="xf_cfzx_gfgg_right_t_l">${types?.get(5)?.name}</div>
+			<div class="xf_cfzx_gfgg_right_t_r">
+				<a target="_blank" href="@{front.wealthinfomation.WealthInfomationAction.newsList(types?.get(5)?.id)}">更多</a>
+			</div>
+			#{/if}
+		</div>
+		<ul class="xf_cfzx_gfgg_rightcg_ul">
+		#{list items:rb1, as:'success'}
+			<li class="xf_cfzx_gfgg_right_ishot clr">
+				<div class="xf_cfzx_gfgg_right_isl">
+					<a target="_blank" href="@{front.wealthinfomation.WealthInfomationAction.newDetails(success?.id)}">
+					#{img class:"lazy", data_original:"${success?.image_filename}", src:"/public/images/loading.gif",alt:""}#{/img}
+					</a>
+				</div>
+				<div class="xf_cfzx_gfgg_right_isr">
+					<div class="xf_cfzx_gfgg_right_is_c">
+						<a target="_blank" href="@{front.wealthinfomation.WealthInfomationAction.newDetails(success?.id)}">${success?.title}</a>
+					</div>
+				</div>
+			</li>
+		#{/list}
+		</ul>
+	</div>
+</div>
+</div>
+<script type="text/javascript">
+	$(function() {
+	    $(".xf_cfzx_gfgg_left_r_t").limit();
+	    $(".xf_cfzx_gfgg_right_is_c").limit();
+		var sWidth = $("#focus").width();
+		var len = $("#focus ul li").length;
+		var index = 0;
+		var picTimer;
+		var btn = "<div class='btnBg'></div><div class='btn'>";
+
+		btn += "</div><div class='preNext pre'></div><div class='preNext next'></div>";
+		$("#focus").append(btn);
+
+		$("#focus .pre").click(function() {
+			index -= 1;
+			if (index == -1) {
+				index = len - 1;
+			}
+			showPics(index);
+		});
+		$("#focus .next").click(function() {
+			index += 1;
+			if (index == len) {
+				index = 0;
+			}
+			showPics(index);
+		});
+		$("#focus ul").css("width", sWidth * (len));
+		$("#focus").hover(function() {
+			clearInterval(picTimer);
+		}, function() {
+			picTimer = setInterval(function() {
+				showPics(index);
+				index++;
+				if (index == len) {
+					index = 0;
+				}
+			}, 2800);
+		}).trigger("mouseleave");
+		function showPics(index) {
+			var nowLeft = -index * sWidth;
+			$("#focus ul").stop(true, false).animate({
+				"left" : nowLeft
+			}, 300);
+		}
+	});
+	
+	function detail(newsId) {
+		window.open("newDetails?id=" + newsId);
+	}
+	
+	function newsList(newsId){
+	    window.open("newsList?typeId=" + newsId);
+	}
+	
+	(function($){
+		    $.fn.FontScroll = function(options){
+		        var d = {time: 3000,s: 'fontColor',num: 1}
+		        var o = $.extend(d,options);
+		        
+
+		        this.children('ul').addClass('line');
+		        var _con = $('.line').eq(0);
+		        var _conH = _con.height(); //滚动总高度
+		        var _conChildH = _con.children().eq(0).height();//一次滚动高度
+		        var _temp = _conChildH;  //临时变量
+		        var _time = d.time;  //滚动间隔
+		        var _s = d.s;  //滚动间隔
+
+
+		        _con.clone().insertAfter(_con);//初始化克隆
+
+		        //样式控制
+		        var num = d.num;
+		        var _p = this.find('li');
+		        var allNum = _p.length;
+
+		        _p.eq(num).addClass(_s);
+
+
+		        var timeID = setInterval(Up,_time);
+				this.hover(function(){clearInterval(timeID)},function(){timeID = setInterval(Up,_time);});
+
+		        function Up(){
+		            _con.animate({marginTop: '-'+_conChildH});
+		            //样式控制
+		            _p.removeClass(_s);
+		            num += 1;
+		            _p.eq(num).addClass(_s);
+		            
+		            if(_conH == _conChildH){
+		                _con.animate({marginTop: '-'+_conChildH},"normal",over);
+		            } else {
+		                _conChildH += _temp;
+		            }
+		        }
+		        function over(){
+		            _con.attr("style",'margin-top:0');
+		            _conChildH = _temp;
+		            num = 1;
+		            _p.removeClass(_s);
+		            _p.eq(num).addClass(_s);
+		        }
+		    }
+		})(jQuery);
+
+		$('#FontScroll').FontScroll({time: 2000,num: 1});
+</script>

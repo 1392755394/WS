@@ -1,0 +1,100 @@
+%{
+		business.User currUser = business.User.currUser();
+
+}%
+
+<div class="c"></div> 
+<div class="ban-box">
+    <div id="slideBox" class="slideBox">
+        <div class="hd">
+            <ul>
+			<li></li><li></li><li></li><li></li><li></li></ul>
+        </div>
+        <div class="bd">
+            <ul>
+            #{list items:homeAds , as:'ads'}	
+			<li>
+				<a 
+					#{if  ads?.is_link_enabled}
+						href = "${ads?.url}" 
+						#{if _?.target == 1}
+							target = "_self"'
+						#{/if}
+						#{else}
+							target = "_blank"
+						#{/else}
+						
+						style="cursor: pointer;"
+					#{/if}
+					style="cursor: default;">
+						#{img src:"${ads?.image_filename}",alt:"广告"}#{/img}
+				</a>
+			</li>
+		    #{/list}                
+            </ul>
+        </div>
+        <a class="prev" href="javascript:void(0)"></a>
+        <a class="next" href="javascript:void(0)"></a>
+    </div>
+    
+    <div class="login"> 
+		<div class="tit">用户登录</div>
+		
+	  #{if currUser == null}
+	       #{form @front.account.loginAndRegisterAction.logining(), id:'submit'}
+          <div class="login-con">
+				 <div class="rgn-lgn-content">
+				
+					
+				</div>
+				 <div  class="rgn-lgn-content">
+					 
+				</div>
+				<div class="fz">
+					<div class="l">
+					</div>
+					
+					<div class="c"></div>
+				</div>
+				<div class="rgn-login-error rgn-hide"></div>  
+				<div class="rgn-nowLogin-submit"><a href="@{front.account.loginAndRegisterAction.login()}" class="btn" id="">去登录</a></div>
+				<div class="bz">
+					<p>还没账号，<a href="@{front.account.LoginAndRegisterAction.register()}" alt="注册理财">马上注册</a></p>
+				</div>
+				<div class="c"></div>
+			</div>
+	       	#{/form}
+	 	#{/if}
+		#{else}		   
+		<div class="login-con">
+            <div class="login-suc-con">
+                <h3>您好，${currUser?.name}</h3>  
+                <h5>欢迎来到东邦易贷 !</h5> 
+                <a href="@{front.account.AccountHome.home()}" alt="理财账户" class="btn-green">我的账户</a>
+                <p> <a href="@{front.account.InvestAccount.investAccount()}" alt="理财账户" style="color: #fff;">查看投资项目</a>，<a href="@{front.account.loginAndRegisterAction.logout()}" class="exit">马上退出</a></p>
+            </div>
+        </div> 
+ 
+         #{/else}
+        
+
+    </div>
+    <div class="ban-new">
+        <div class="wp newcon">
+            <strong></strong>
+            <div id="miniNews"> 
+				
+				  #{list items:news,as:'news'}
+				   <p>
+				      <a href="front/wealthinfomation/newDetails?id=${news?.id}" target="_blank">${news.title}</a>
+				    </p>  
+				  #{/list}
+
+				
+            </div>
+            <a class="more" href="@{front.wealthinfomation.WealthInfomationAction.newsList(7)}">更多</a>
+        </div>
+    </div> 
+</div>
+
+

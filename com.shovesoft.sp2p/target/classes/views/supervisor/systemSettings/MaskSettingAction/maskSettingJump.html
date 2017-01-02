@@ -1,0 +1,64 @@
+#{extends 'common/supervisor.html' /}
+#{set title:'系统基本资料设置' /} 
+<div class="xn_c_contentwarp">
+  <div class="xn_c_contentlist">
+    #{include "supervisor/systemSettings/common/leftBar.control"/}
+    <div class="xn_c_content">
+      <div class="xf_content_add">
+    #{form @maskAdd(), id:'systemDataSubmit'}
+       <div class="xfht_t_j_y_2">
+          <!--右上-->
+          <div class="xf_ht_obu_fklm">  网贷软件系统遮罩层数据设置</div>
+          <div class="xf_ht_jbzl_sz">
+          <div class="xf_ht_rjsc_zlsz">
+            <table class="xf_ht_rjsc_zlsz_table" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="180" align="right" valign="top">1.平台收益率:</td>
+              <td>
+              <input class="xfht_zr_input xfht_zr_input_shoping" type="text" name="mask_percent" id="platformName" ><br />
+              <span style="color:#999;">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
+              </td>
+            </tr>
+              <tr>
+              <td width="180" align="right" valign="top">2. 平台大倍率:</td>
+              <td>
+              <input class="xfht_zr_input xfht_zr_input_shoping" type="text" name="mask_multiple" id="platformName" ><br />
+              <span style="color:#999;">&nbsp</span>
+              </td>
+            </tr>
+              <tr>
+              <td width="180" align="right" valign="top">3.平台小倍率:</td>
+              <td>
+              <input class="xfht_zr_input xfht_zr_input_shoping" type="text" name="mask_small_multiple" id="platformName" ><br />
+              <span style="color:#999;">&nbsp</span>
+              </td>
+            </tr>
+              <tr>
+              <td width="180" align="right" valign="top">4.注册送的钱数:</td>
+              <td>
+              <input class="xfht_zr_input xfht_zr_input_shoping" type="text" name="mask_give_money" id="platformName" ><br />
+              <span style="color:#999;">&nbsp</span>
+              </td>
+            </tr>
+             
+            </table>
+              <input class="xf_ht_tcc_button_ok" type="button" value="保  存" onClick="save()">
+        </div>
+      </div>
+      </div>
+       #{/form}
+      </div>
+    </div>   
+  </div>
+</div>
+
+
+<script type="text/javascript">
+ 
+  
+  function save(){
+    $("#systemDataSubmit").submit();
+  }
+</script>
+
+

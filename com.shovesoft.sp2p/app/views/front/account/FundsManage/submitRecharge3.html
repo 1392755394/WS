@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="content-Type" content="text/html; charset=gbk">
+<title>Servlet AccountServlet</title>
+</head>
+<body>
+<form action="${args.url}" id="frm1" method="post">
+ <input type="hidden" name="v_mid" value="${args.v_mid}">
+      <input type="hidden" name="v_oid" value="${args.v_oid}">
+      <input type="hidden" name="v_amount" value="${args.v_amount}">
+      <input type="hidden" name="v_moneytype" value="${args.v_moneytype}">
+      <input type="hidden" name="v_url" value="${args.v_url}">
+      <input type="hidden" name="v_md5info" value="${args.v_md5info}">
+</form>
+<script language="javascript">
+document.getElementById("frm1").submit();
+</script>
+</body>
+</html>

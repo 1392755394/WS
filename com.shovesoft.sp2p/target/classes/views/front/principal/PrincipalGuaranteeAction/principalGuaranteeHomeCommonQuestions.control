@@ -1,0 +1,8 @@
+	<div class="xf_zjbz_home_con">
+			<h3 class="xf_mem_accout_title">本金保障常见问题</h3>
+			<div class="xf_mem_accout_contwo">
+				<ul class="xf_mem_accout_bottomUL">
+				${FAQ?.content}
+				</ul>
+			</div>
+		</div>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="content-Type" content="text/html; charset=UTF-8">
+<title>Servlet AccountServlet</title>
+</head>
+<body>
+<form action="${args.url}" id="frm1" method="post">
+
+ <input type="hidden" name="MerNo" value="${args.MerNo}">
+      <input type="hidden" name="BillNo" value="${args. BillNo}">
+      <input type="hidden" name="orderTime" value="${args.orderTime}">
+      <input type="hidden" name="Amount" value="${args.Amount}">
+      <input type="hidden" name="ReturnURL" value="${args.ReturnURL}">
+       <input type="hidden" name="AdviceURL" value="${args.AdviceURL}">      
+      <input type="hidden" name="SignInfo" value="${args.SignInfo}">   
+</form>
+<script language="javascript">
+document.getElementById("frm1").submit();
+</script>
+</body>
+</html>

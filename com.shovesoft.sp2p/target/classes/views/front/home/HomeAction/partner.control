@@ -1,0 +1,36 @@
+
+
+
+</div>
+       <div class="con3 bgf">
+            <div class="wp">            
+                <div class="picScroll-left">
+                    <div class="hd tit">
+                        <div class="">
+                            <a href="@{front.help.HelpCenterAction.partner(-1008)}">合作伙伴</a>
+                        </div>
+                        <div class="btnss">                           
+                            <a class="prev"></a>
+                            <a class="next"></a>
+                        </div>
+                    </div>
+                    <div class="c"></div>
+                    <div class="bd">
+                        <ul class="picList">
+                #{list items:adsPartner,as:'adsPartner'}        
+				<li><div class="pic"><a href="${adsPartner?.url}"  target="_blank"> <img src="${adsPartner?.imageFileName}" width="186" height="50" />   </a></div></li>
+		        #{/list}	
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="h30"></div>
+</div>
+<div class="c"></div>
+
+
+
+

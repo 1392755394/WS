@@ -1,0 +1,35 @@
+%{ business.BackstageSet currBackstageSet =
+business.BackstageSet.getCurrentBackstageSet(); }% #{extends
+'common/frontMain.html' /} #{set title:currBackstageSet.seoTitle /}
+
+<div class="welPeople">
+
+	<div class="welIndex"></div>
+
+	<div class="welbody">
+	   <table class="weltable">
+	      <tr>
+	      <td>编号</td>
+	      <td>姓名</td>
+	      <td>时间</td>
+	      <td>金额(单位/元)</td>	      
+	      </tr>
+	    #{list items:welList, as:'bids'}   
+	     <tr>
+	      <td> ${bids?.order} </td>
+	      <td>${bids?.name}</td>		
+	      <td>${bids?.time}</td>
+	      <td>${bids?.amount}</td>	           
+	     </tr>
+	    #{/list} 
+	   
+	   </table>
+	</div>
+	<div class="welfooter"></div>
+
+
+
+
+</div>
+
+

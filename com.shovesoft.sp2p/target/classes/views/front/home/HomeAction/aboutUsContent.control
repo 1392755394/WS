@@ -1,0 +1,60 @@
+ %{
+  business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+ <div class="xf_about_box">
+	<div class="xf_about_contet">
+#{if hire == null}	
+    ${contentByTypeId.raw()};		
+#{/if}
+#{else}
+  	 #{list items:hire , as:'bidss'} 	
+       <div id="firstpane" style="padding:1em; border:1px solid #ddd; margin:0 40px 10px 0;">
+	    <p class="menu_head current"> ${bidss?.title}  <a style="float:right; margin-right:-10px 10px 0 0; cursor:pointer;  font-weight:bold;"> >> </a></p>	
+	     <div  style="display:none"  class=menu_body >
+	        ${bidss?.content}
+	     </div>
+	   </div>		
+	 #{/list}
+	
+	
+#{/else}		
+	</div>	
+	
+		<div class="clr">
+		<div class="xf_about_contet_l">
+			<span class="xf_about_contet_sz">${investData[0]}</span>投资人已加入东邦易贷
+		</div>
+		<div class="xf_about_contet_r">
+			<span class="xf_about_contet_sz2">
+			#{format money:investData[1]}#{/format}
+			</span>投资额已交易成功
+		</div>
+		
+	</div>	
+</div>
+<!-- 清除浮动 -->
+<div class="clear"></div>
+
+ <script> 
+	$(function(){
+			$("#companyDescription").addClass("xf_con_wyjk_leftliisshow");
+	})
+	
+
+  $(document).ready(function(){
+	
+	$("#firstpane p.menu_head").click(function(){
+		$(this).addClass("current").next("div.menu_body").slideToggle(300).siblings("div.menu_body").slideUp("slow");
+		$(this).siblings().removeClass("current");
+	});
+	$("#secondpane .menu_body:eq(0)").show();
+	$("#secondpane p.menu_head").mouseover(function(){
+		$(this).addClass("current").next("div.menu_body").slideDown(500).siblings("div.menu_body").slideUp("slow");
+		$(this).siblings().removeClass("current");
+	});
+	
+});
+
+	
+
+</script>		

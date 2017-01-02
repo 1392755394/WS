@@ -1,0 +1,442 @@
+#{extends 'common/frontMain.html' /} %{ business.BackstageSet
+currBackstageSet = business.BackstageSet.getCurrentBackstageSet(); }%
+#{set title:currBackstageSet.seoTitle+'|红包' /}
+
+<script type="text/javascript"
+	src="@{'/public/javascripts/jquery.rotate.min.js'}"></script>
+<style type="text/css">
+.rotary {
+    top:150px;
+	position: relative;
+	width: 850px;
+	height: 790px;
+	margin-left:auto;
+	margin-right:auto; 
+	background-color: none;    
+	background: url(/public/images/bg1.png) no-repeat;
+}
+
+.rotaryArrow {
+	position: absolute;
+	left: 181px;
+	top: 104px;
+	width: 294px;
+	height: 294px;
+	cursor: pointer;
+	background-image: url(/public/images/arrow.png);
+}
+
+.list {
+	position: absolute;
+	right: 48px;
+	top: 144px;
+	width: 120px;
+	height: 320px;
+	overflow: hidden;
+}
+
+.list h3 {
+	display: none;
+}
+
+.list li {
+	height: 37px;
+	font: 14px/37px "Microsoft Yahei";
+	color: #ffea76;
+	text-indent: 25px;
+	background: url(/public/images/user.png) 0 no-repeat;
+}
+
+.result {
+	display: none;
+	position: absolute;
+	left: 130px;
+	top: 190px;
+	width: 395px;
+	height: 118px;
+	background-color: rgba(0, 0, 0, 0.75);
+	filter: alpha(opacity =     90);
+}
+
+.result a {
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	width: 25px;
+	height: 25px;
+	text-indent: -100px;
+	background-image: url(/public/images/close.png);
+	overflow: hidden;
+}
+
+.result p {
+	padding: 45px 15px 0;
+	font: 16px "Microsoft Yahei";
+	color: #fff;
+	text-align: center;
+}
+
+.result em {
+	color: #ffea76;
+	font-style: normal;
+}
+
+.egg {
+	width: 1420px;
+	height: 616px;
+    
+}
+
+.egg ul li {
+	z-index: 999;
+}
+
+.eggList {
+	padding-top: 300px;
+	margin-left:auto;
+	margin-right:auto;
+	position: relative;
+	width: 660px;
+}
+
+.eggList li {
+	float: left;
+	background: url(/public/images/images/egg_1.png) no-repeat bottom;
+	width: 158px;
+	height: 187px;
+	cursor: pointer;
+	position: relative;
+	margin-left: 55px;
+}
+
+.eggList li span {
+	position: absolute;
+	width: 30px;
+	height: 60px;
+	left: 68px;
+	top: 64px;
+	color: #ff0;
+	font-size: 42px;
+	font-weight: bold
+}
+
+.eggList li.curr {
+	background: url(/public/images/images/egg_2.png) no-repeat bottom;
+	cursor: default;
+	z-index: 300;
+}
+
+.eggList li.curr sup {
+	position: absolute;
+	background: url(/public/images/images/img-4.png) no-repeat;
+	width: 232px;
+	height: 181px;
+	top: -36px;
+	left: -34px;
+	z-index: 800;
+}
+
+.hammer {
+	background: url(/public/images/images/img-6.png) no-repeat;
+	width: 74px;
+	height: 87px;
+	position: absolute;
+	text-indent: -9999px;
+	z-index: 150;
+	left: 168px;
+	top: 265px;
+}
+
+.resultTip {
+	position: absolute;
+	background: #ffc;
+	width: 148px;
+	padding: 6px;
+	z-index: 500;
+	margin-top:70px;
+	top: 200px;
+	left: 10px;
+	color: #f60;
+	text-align: center;
+	overflow: hidden;
+	display: none;
+	z-index: 500;
+}
+
+.resultTip b {
+	font-size: 14px;
+	line-height: 24px;
+}
+.mains{
+   
+ 
+    height:416px;
+    width:auto;
+    margin-left:auto;
+    margin-right:auto;    
+
+}
+
+
+</style>
+
+
+<div style="background: url(/public/images/hdzg.jpg) no-repeat;">
+<div class="mains">
+	<div class="egg">
+		<ul class="eggList">
+			<p class="hammer" id="hammer">锤子</p>
+			<p class="resultTip" id="resultTip">
+				<b id="results"></b>
+			</p>
+			<li id="one" style="list-style:none;"><span></span><sup></sup>
+			</li>
+			<li id="two" style="list-style:none;"><span></span><sup></sup>
+			</li>
+			<li id="three" style="list-style:none;"><span></span><sup></sup>
+			</li>
+		</ul>
+	</div>
+</div>
+		<div>
+		<!-- Demo start  -->
+		<div class="rotary">
+			<div class="rotaryArrow" id="rotaryArrow"></div>
+			<div class="list">
+				<h3>中奖名单</h3>
+				<ul>
+					<li><a href="" style="color:#ffea76;">中奖名单</a>
+					</li>
+					<li>1569****851</li>
+					<li>1515****206</li>
+					<li>1550****789</li>
+					<li>1370****627</li>
+					<li>1828****215</li>
+					<li>1589****572</li>
+					<li>1583****825</li>
+					<li>1396****805</li>
+					<li>1332****261</li>
+					<li>1884****863</li>
+					<li>1384****955</li>
+					<li>1897****137</li>
+					<li>1342****973</li>
+					<li>1558****071</li>
+					<li>1554****168</li>
+					<li>1562****018</li>
+					<li>1805****856</li>
+					<li>1354****809</li>
+					<li>1383****364</li>
+				</ul>
+			</div>
+			<div class="result" id="result">
+				<p id="resultTxt"></p>
+				<a href="javascript:" id="resultBtn" title="关闭">关闭</a>
+			</div>
+		</div>
+
+</div>
+</div>
+<script type="text/javascript">
+  var  datasr;
+   
+function eggClick(obj) {
+	var _this = obj;
+		if(_this.hasClass("curr")){
+			alert("蛋都碎了，别砸了！刷新再来.");
+			return false;
+		}
+		//_this.unbind('click');
+		$(".hammer").css({"top":_this.position().top-55,"left":_this.position().left+185});
+		$(".hammer").animate({
+			"top":_this.position().top-25,
+			"left":_this.position().left+125
+			},30,function(){
+				_this.addClass("curr"); //蛋碎效果
+				_this.find("sup").show(); //金花四溅
+				$(".hammer").hide();
+				$('.resultTip').css({display:'block',top:'100px',left:_this.position().left+45,opacity:0}).animate({top: '50px',opacity:1},300,function(){				
+				
+					if(datasr !== null && datasr!==""){				   
+						$("#results").html("恭喜，您中得"+datasr+"!");
+					}		
+					else{
+						$("#results").html("很遗憾,您没能中奖!");
+					}
+				});	
+			}
+		);
+}
+
+
+$("#one").click(function() {
+          $.ajax({
+				type : "get",
+				url : "@{front.red.RedAction.dropEggCount()}",
+				async : false,
+				callback : "callback",
+				dataType : "jsonp",
+				success : function(data) {					
+             	if (data.msg !== null && data.msg !== "") {
+						alert(data.msg);
+						return;
+					}
+				  datasr =data.anniu;
+				  		 
+				  $("#one").children("span").hide();
+	              eggClick($("#one"));
+	                            
+  			    },
+				error : function(e) {
+					alert(e);
+				}
+			})
+});
+
+
+$("#two").click(function() {
+          $.ajax({
+				type : "get",
+				url : "@{front.red.RedAction.dropEggCount()}",
+				async : false,
+				callback : "callback",
+				dataType : "jsonp",
+				success : function(data) {					
+             		if (data.msg !== null && data.msg !== "") {
+						alert(data.msg);
+						return;
+					}	
+					 datasr =data.anniu;			
+				  $("#two").children("span").hide();
+	              eggClick($("#two"));			
+  			    },
+				error : function(e) {
+					alert(e);
+				}
+			})
+});
+
+
+$("#three").click(function() {
+
+           $.ajax({
+				type : "get",
+				url : "@{front.red.RedAction.dropEggCount()}",
+				async : false,
+				callback : "callback",
+				dataType : "jsonp",
+				success : function(data) {					
+             		if (data.msg !== null && data.msg !== "") {
+						alert(data.msg);
+						return;
+					}	
+					 datasr =data.anniu;			
+				  $("#three").children("span").hide();
+	              eggClick($("#three"));			
+  			    },
+				error : function(e) {
+					alert(e);
+				}
+			})
+
+});
+
+$(".eggList li").hover(function() {
+	var posL = $(this).position().left + $(this).width();
+	$("#hammer").show().css('left', posL);
+})
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+	$(function() {
+		var $rotaryArrow = $('#rotaryArrow');
+		var $result = $('#result');
+		var $resultTxt = $('#resultTxt');
+		var $resultBtn = $('#result');
+		var datas = null;
+
+		$rotaryArrow.click(function() {
+			$.ajax({
+				type : "get",
+				url : "@{front.red.RedAction.ernieCount()}",
+				async : false,
+				callback : "callback",
+				dataType : "jsonp",
+				success : function(data) {
+					if (data.msg !== null && data.msg !== "") {
+						alert(data.msg);
+						return;
+					}
+					if (data.anniu !== null) {
+						datas = parseInt(data.anniu);
+						switch (datas) {
+						case 1:
+							rotateFunc(1, 87,
+									'恭喜您获得了 <em>1</em> 元现金,已经冲入账户，请注意查收');
+							break;
+						case 2:
+							rotateFunc(2, 43,
+									'恭喜您获得了 <em>5</em> 元现金,已入账户，请注意查收');
+							break;
+						case 3:
+							rotateFunc(3, 134,
+									'恭喜您获得了 <em>10</em> 元现金,已入账户，请注意查收');
+							break;
+						case 4:
+							rotateFunc(4, 177, '感谢参与!');
+							break;
+						case 5:
+							rotateFunc(5, 223,
+									'恭喜您获得了 <em>20</em> 元现金,已入账户，请注意查收');
+							break;
+						case 6:
+							rotateFunc(6, 268,
+									'恭喜您获得了 <em>50</em> 元现金,已入账户，请注意查收');
+							break;
+						case 7:
+							rotateFunc(7, 316,
+									'恭喜您获得了 <em>30</em> 元现金,已入账户，请注意查收');
+							break;
+						default:
+							rotateFunc(0, 0, '很遗憾，这次您未抽中奖，继续加油吧！');
+						}
+
+					}
+
+				},
+				error : function(e) {
+					alert(e);
+				}
+
+			})
+
+		});
+
+		var rotateFunc = function(awards, angle, text) { //awards:奖项，angle:奖项对应的角度
+			$rotaryArrow.stopRotate();
+			$rotaryArrow.rotate({
+				angle : 0,
+				duration : 5000,
+				animateTo : angle + 1440, //angle是图片上各奖项对应的角度，1440是让指针固定旋转4圈
+				callback : function() {
+					$resultTxt.html(text);
+					$result.show();
+				}
+			});
+		};
+
+		$resultBtn.click(function() {
+			$result.hide();
+		});
+	});
+</script>

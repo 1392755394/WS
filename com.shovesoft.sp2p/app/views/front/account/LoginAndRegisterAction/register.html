@@ -1,0 +1,394 @@
+ #{extends 'common/frontMain.html' /}
+ %{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}% 
+ #{set title:currBackstageSet.seoTitle + '--注册' /}
+ 
+<div class="xf_login_centent clr">
+	<div class="xf_login_centent_l">
+		<div class="xf_login_centent_rightbj"></div>
+		<div class="xf_login_title">
+			<span class="xf_login_title_yhdl">免费注册</span>
+			<a href="@{front.account.loginAndRegisterAction.login()}"
+				class="xf_login_title_zcxyh">直接登录</a>
+		</div>
+		<div class="xf_login_inputsr">
+			#{form @front.account.loginAndRegisterAction.registering(), id:'submit'}
+			<ul class="xf_login_inputsrul xf_register_inputsrul">
+				<li>
+					<div class="xf_register_inputsrul_l">
+						<span class="xf_register_hx">*</span>手机号：
+					</div>
+					<div class="xf_login_inputsrul_r">
+					   
+					    <input type="text" id="mobile1" name="mobile1" value="${flash?.mobile1}" class="xf_login_shurk"  />
+					    
+						<span class="xf_register_intext" id="s_userName">输入您的手机号码！</span>
+					</div>
+				</li>
+				
+			    <li>
+					<div class="xf_register_inputsrul_l">
+						<span class="xf_register_hx">*</span>验证码：
+					</div>
+					<div class="xf_login_inputsrul_r">
+						<input class="xf_login_yzm" type="text" id="code" name="code" value="${flash?.code}" />
+						<input type="hidden" name="randomID" id = "randomID" />
+						<img src="" onclick="change()" class="xf_login_yzmimg" id="img" width="75px" height="32px">
+						<a onclick="change()" class="xf_login_inputspan">刷新</a>
+					</div>
+					<br />
+					<span id="s_code" class="xf_register_intext"></span>
+				</li>				
+				
+			   <li>
+					<div class="xf_register_inputsrul_l">
+						<span class="xf_register_hx">*</span>手机码：
+					</div>
+					<div class="xf_login_inputsrul_r">
+						<input class="xf_login_yzm" type="text" id="phoneCode" name="phoneCode"  />	&nbsp &nbsp 
+						<input type="button" style=" text-align: center; line-height: 25px; color: #666;  font-size: 12px;"  id="telephone1"   onclick="mobileCode1()" value="&nbsp 获取验证码 &nbsp"></input>	
+					</div>
+					<br />
+					<span id="s_code" class="xf_register_intext"></span>
+				</li>
+
+				<li>
+					<div class="xf_register_inputsrul_l">
+						<span class="xf_register_hx">*</span>密码：
+					</div>
+					<div class="xf_login_inputsrul_r">
+						<input type="password" id="password" name="password" value="${flash?.password}" class="xf_login_shurk">
+						<span class="xf_register_intext" id="s_password">密码由6-20位字符组成(不含空格)</span>
+					</div>
+				</li>
+				<li>
+					<div class="xf_register_inputsrul_l">
+						<span class="xf_register_hx">*</span>确认密码：
+					</div>
+					<div class="xf_login_inputsrul_r">
+						<input class="xf_login_shurk" type="password" id="confirmPassword" value="${flash?.confirmPassword}" name="confirmPassword" />
+						<span class="xf_register_intext" id="s_confirmPassword"></span>
+					</div>
+					<br />
+					<span id="s_confimpassword"></span>
+				</li>
+				<li>
+					<div class="xf_register_inputsrul_l">
+						邀请码：
+					</div>
+					<div class="xf_login_inputsrul_r">
+					#{if flash.recommendUserName != null}
+					  <input class="xf_login_shurk" type="text" id="recommended" name="recommended" value="${flash?.recommendUserName}" readonly="readonly"/>
+					#{/if}
+					#{else}
+						<input class="xf_login_shurk" type="text" id="recommended" name="recommended" value="${params?.un}" readonly="readonly"/>
+					#{/else}	
+						<span class="xf_register_intext" id="s_recommended">如无邀请码，可不填写</span>
+					</div>
+					<br />
+					<span id="s_Invitationcode"></span>
+				</li>
+				
+				<li>
+					<div class="xf_register_inputsrul_l">
+						&nbsp;
+					</div>
+					<div class="xf_login_inputsrul_r">
+						<input type="checkbox" class="xf_register_fxk" id="agreement" name="agreement" checked="checked">
+						<span class="xf_register_intext xf_register_intext2">我已阅读并同意</span>
+						<span class="xf_register_inxieyi" onclick="showProtocol()">《${currBackstageSet?.platformName}用户注册协议》</span>
+					</div>
+				</li>
+				<li>
+					<div class="xf_register_inputsrul_l">
+						&nbsp;
+					</div>
+					<div class="xf_login_inputsrul_r">
+					<a onClick="register()" class="xf_con_inputfbjk">注 册</a>
+					</div>
+				</li>
+			</ul>
+			#{/form}
+		</div>
+	</div>
+	
+</div>
+#{include "front/account/LoginAndRegisterAction/register.control"/}
+<script type="text/javascript">
+
+
+	function mobileCode1() {
+	   
+		var mobile = $("#mobile1").val().trim();
+		var code=$("#code").val().trim();
+		var randomID=$("#randomID").val();
+				
+		
+		if(mobile == '') {
+			alert("请输入手机号码");
+			return;
+		}
+		
+		if(!mobile.isMobileNum()) {
+			alert("请输入正确的手机号码");
+			return;
+		}
+		
+		if(code == '') {
+			alert("请输入上方图片校验码");
+			return;
+		}	
+		
+		
+		 var listAction = #{jsAction @front.account.LoginAndRegisterAction.codeReturn(':codeImg') /};
+	     var codeImg =  $("#randomID").val();
+	     
+		 $.post(listAction({codeImg:codeImg}), function(data) {
+		            
+		   			var arr = eval(data);
+		   		
+					var results = arr.randomID;
+					
+					var code = $("#code").val();
+					
+		   			if(results.toLowerCase() != code.toLowerCase()){
+				           alert("验证码输入错误");
+				           return;
+					}else{ 
+		    var verifyMobile = #{jsAction @front.account.LoginAndRegisterAction.verifyMobile(':mobile')/}
+		    $.post(verifyMobile({mobile:mobile}),function(data){
+		    var arr = eval(data);
+		      
+		    if(arr.error.code < 0){
+		        alert(arr.error.msg);
+		        return;
+		    } 
+		 
+		    teleCodeTimer("telephone1");
+		   
+		    });
+			            }
+		   		});	
+	
+	}
+
+
+
+	$(function(){
+	
+	    var setCode = #{jsAction @front.account.loginAndRegisterAction.setCode()/}
+			$.post(setCode({}),function(data){
+				var arr=eval(data);
+				var img = arr.img;
+				$("#img").attr("src","@{front.account.loginAndRegisterAction.getImg()}?id="+img);	
+				$("#randomID").val(img);
+		});
+		$(".xf_wyjkfb_4_windowClose").click(function(){
+			$(this).parents(".xf_zqzr_znx_window").hide(300);
+		});
+		
+		
+	});
+	
+	function showProtocol() {
+	
+		showDiv($("#xf_mem_zc_xytc"));
+	}
+	
+	function change(){
+		var setCode = #{jsAction @front.account.loginAndRegisterAction.setCode()/}
+		$.post(setCode({}),function(data){
+		var arr=eval(data);
+		var img = arr.img;
+		$("#randomID").val(img);
+		$("#img").attr("src","@{front.account.loginAndRegisterAction.getImg()}?id="+img)	
+		});
+	}
+</script>
+
+<script type="text/javascript">
+      		
+	   var bName = 0;
+       var bEmail = 0;
+       var bRecommended = 0;
+  //     var bCode = 0;
+		
+       $(document).ready(function(){
+		   $("form :input").blur(function(){ 
+		   
+		   if($(this).attr("id") == "mobile1"){
+		   
+		     if(this.value=="" ||　this.value== "请使用真实手机号码"){
+		           $("#s_userName").removeClass("xf_register_intext");
+		           $("#s_userName").removeClass("xf_register_intext3");
+				   $("#s_userName").addClass("xf_register_intext1");
+		           $("#s_userName").html("请填写手机号！");
+		     }else if(this.value.length < 11){ 
+		           $("#s_userName").removeClass("xf_register_intext");
+		           $("#s_userName").removeClass("xf_register_intext3");
+				   $("#s_userName").addClass("xf_register_intext1");
+		           $("#s_userName").html("用户名长度为11个数字");
+		     }else if(this.value.length > 11){
+		           $("#s_userName").removeClass("xf_register_intext");
+		           $("#s_userName").removeClass("xf_register_intext3");
+				   $("#s_userName").addClass("xf_register_intext1");
+		           $("#s_userName").html("用户名长度为11个数字");
+		     }else if(!/^\d{8,12}$/.test(this.value)){
+		           $("#s_userName").removeClass("xf_register_intext");
+		           $("#s_userName").removeClass("xf_register_intext3");
+				   $("#s_userName").addClass("xf_register_intext1");
+		           $("#s_userName").html("用户名不能含有特殊字符");
+		     }else{
+		          var name = this.value;
+		          	          
+		          //检查手机是否已经使用
+		          
+		         var hasMobileExistS = #{jsAction @front.account.loginAndRegisterAction.hasMobileExistS(':name')/}
+		         
+		          	$.post(hasMobileExistS({name:encodeURI(name)}),function(data){
+				
+				   var arr=eval(data);
+				  
+				  if(arr.error.code < 0){
+				  	   bName = -1;
+				  	   $("#s_userName").removeClass("xf_register_intext");
+			           $("#s_userName").removeClass("xf_register_intext3");
+					   $("#s_userName").addClass("xf_register_intext1");
+			           $("#s_userName").html(arr.error.msg);
+				    }else{
+				       bName = 0;
+				       $("#s_userName").removeClass("xf_register_intext1");
+				       $("#s_userName").removeClass("xf_register_intext");
+				       $("#s_userName").addClass("xf_register_intext3");
+					   $("#s_userName").html("该手机可以使用");
+				    }
+		          });
+		          
+		                 
+		         }
+		         
+		     }
+
+		   if($(this).attr("id") == "password"){
+		   
+		     if(this.value == ""){
+		          $("#s_password").removeClass("xf_register_intext");
+		          $("#s_password").removeClass("xf_register_intext3");
+				  $("#s_password").addClass("xf_register_intext1");
+		          $("#s_password").html("请设置您的密码");  
+		     }else if(this.value.length < 6){
+		          $("#s_password").removeClass("xf_register_intext");
+		          $("#s_password").removeClass("xf_register_intext3");
+				  $("#s_password").addClass("xf_register_intext1");
+		          $("#s_password").html("密码长度为6-20个字符"); 
+		     }else if(this.value.length >20){
+		          $("#s_password").removeClass("xf_register_intext");
+		          $("#s_password").removeClass("xf_register_intext3");
+				  $("#s_password").addClass("xf_register_intext1");
+		          $("#s_password").html("密码长度为6-20个字符"); 
+		     }else if(!/^([^\s'‘’]{6,20})$/.test(this.value)){
+		          $("#s_password").removeClass("xf_register_intext");
+		          $("#s_password").removeClass("xf_register_intext3");
+				  $("#s_password").addClass("xf_register_intext1");
+		     	  $("#s_password").html("密码由6-20位字符组成（不含'）");
+		     }
+		     else{
+		           $("#s_password").removeClass("xf_register_intext1");
+		           $("#s_password").removeClass("xf_register_intext");
+				   $("#s_password").addClass("xf_register_intext3");
+		           $("#s_password").html("密码符合要求"); 
+		     }
+		   }
+
+		   if($(this).attr("id")=="confirmPassword"){
+		   	
+		     if(this.value == ""){
+		           $("#s_confirmPassword").removeClass("xf_register_intext");
+		           $("#s_confirmPassword").removeClass("xf_register_intext3");
+				   $("#s_confirmPassword").addClass("xf_register_intext1");
+		           $("#s_confirmPassword").html("请输入确认密码"); 
+		     }else if(this.value != $("#password").val()){ 
+		           $("#s_confirmPassword").removeClass("xf_register_intext");
+		           $("#s_confirmPassword").removeClass("xf_register_intext3");
+				   $("#s_confirmPassword").addClass("xf_register_intext1");
+		           $("#s_confirmPassword").html("两次输入的密码不一致"); 
+		     }else{
+		           $("#s_confirmPassword").removeClass("xf_register_intext1");
+		           $("#s_confirmPassword").removeClass("xf_register_intext");
+				   $("#s_confirmPassword").addClass("xf_register_intext3");
+		           $("#s_confirmPassword").html("确认密码成功");
+		     }
+		  }	
+
+	   });	 
+	 });
+		 
+     function register(){
+     	 var mobile1 = $("#mobile1").val();
+     	 
+	     if(mobile1 =='' ||　mobile1 == "请输入真实手机号码!"){
+	          alert("请填写手机号码");
+	          return;
+	     }else if(mobile1.length < 11){ 
+	          alert("用户名长度为11位！");
+	          return;
+	     }else if(mobile1.length > 11){
+	          alert("用户名长度为11位！");
+	          return;
+	     }else if(!/^([^\s'‘’]{6,20})$/.test(mobile1)){
+	          alert("手机号不能含有特殊字符");
+	          return;
+	     }else if(bName < 0){
+		      alert("该用户名已存在");
+		      return;
+	    }
+       
+      var phoneCode=$("#phoneCode").val().trim(); 
+      
+      if(phoneCode=""){
+          alert("请输入手机验证码!");
+          return; 
+      }
+      
+      
+      var password = $("#password").val();
+		   
+      if(password == ""){
+          alert("请设置您的密码");
+          return; 
+      }else if(password.length < 6){
+         alert("密码长度为6-20个字符"); 
+         return;
+      }else if(password.length >20){
+          alert("密码长度为6-20个字符"); 
+          return;
+      }else if(!/^([^\s'‘’]{6,20})$/.test(password)){
+     	  alert("密码由6-20位字符组成（不含'）");
+     	  return;
+      }
+		      
+	  var confirmPassword = $("#confirmPassword").val();
+	    
+      if(confirmPassword == ""){
+           alert("请输入确认密码"); 
+           return;
+      }else if(confirmPassword != $("#password").val()){ 
+           alert("两次输入的密码不一致"); 
+           return;
+      }
+      
+      
+      if(!$("#agreement").is(":checked")) {
+           alert("注册${currBackstageSet?.platformName}需同意注册协议");
+           return;
+      }
+      
+      if(bRecommended < 0) {
+      	   alert("对不起，该用户不存在，不能成为推荐人");
+      	   return;
+      }
+      
+      $("#submit").submit();
+   }
+</script>

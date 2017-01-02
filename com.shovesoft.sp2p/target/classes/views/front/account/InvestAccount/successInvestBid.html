@@ -1,0 +1,45 @@
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+#{extends 'common/frontMain.html' /}
+#{set title:currBackstageSet.seoTitle + ' | 我的账户   | 理财子账户  | 已成功的理财标'/}
+<!-- 内容区域 start -->
+	<div class="xf_con_box">
+		<div class="xf_con_mem_nav"></div>
+		<!-- 左边导航区域 -->
+		#{include "front/account/AccountHome/homeLeft.control"/}
+		<!-- 右侧内容区域 -->
+			<div class="xf_mem_Account xf_mem_shzdjkb_box" id ="bids">
+		    </div>
+		<!-- 清除浮动 -->
+		<div class="clear"></div>
+	</div>
+<!-- 内容区域 end -->
+
+<script>
+	
+      	$(function(){
+      		/* 高亮显示 */
+			showHighLightFront(19);
+			showHighLightFront2(7, 4);
+			
+     		var pageNum =1;
+     		var pageSize = 10;
+     		showSuccessInvestBids(pageNum,pageSize);
+     	
+     	})
+      
+     function showSuccessInvestBids(pageNum,pageSize){
+    	
+    	var type = $("#type").val();
+    	var paramter = $("#paramter").val();
+    	$.ajax({
+    	  url:"@{queryUserSuccessInvestBids()}",
+    	  type:"POST",
+    	   data:{"pageNum" : pageNum,"pageSize" : pageSize,"type" : type,"paramter" : paramter},
+    	  success:function(data){$("#bids").html(data);},
+		  error:function(){alert("对不起，出现错误!");}
+    	})
+   }
+</script>
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_usr.js'}"></script>

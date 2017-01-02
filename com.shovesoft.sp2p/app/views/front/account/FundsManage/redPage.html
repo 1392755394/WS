@@ -1,0 +1,99 @@
+%{ business.BackstageSet currBackstageSet =
+business.BackstageSet.getCurrentBackstageSet(); }% #{extends
+'common/frontMain.html' /} #{set title:currBackstageSet.seoTitle + ' |
+我的账户 | 资金管理 | 交易记录'/}
+
+<div class="xf_con_box" style="height:700px;">
+	<div class="xf_con_mem_nav"></div>
+	#{include "front/account/AccountHome/homeLeft.control"/}
+	<div class="xf_mem_Account">
+		<h3 class="xf_mem_accout_title">红包记录</h3>
+		<table>
+         #{if  tag==1}
+                                                  无
+         #{/if}
+			#{list items:ee , as:'bid'}
+
+			<tr>
+
+				<td style="width:220px;height:30px;">${bid?.Red_Details}</td>
+				<td style="width:220px;height:30px;">${bid?.Red_Amount} 元</td>
+				<td style="width:220px;height:30px;">${bid?.Red_UseGetTime}</td>
+				#{if bid?.Red_Use_State == 1}
+				<td style="width:220px;height:30px;">未使用 <a href="@{front.invest.Roma_InvestAction.detailsRomaBid()}">点击使用</a>
+				</td> #{/if} 
+				#{if bid?.Red_Use_State == 0}
+				<td style="width:220px;height:30px;">已经失效</td> 
+				#{/if}
+
+
+			</tr>
+			#{/list}
+
+		</table>
+
+	</div>
+	<div class="xf_mem_Account">
+		<h3 class="xf_mem_accout_title">尚未领取的红包</h3>
+
+
+		<table>
+        #{if  tag==2}
+                                                没有
+         #{/if}
+		#{list items:ff , as:'bids'}
+
+			<tr>
+				<td style="width:220px;height:40px;">${bids?.Red_Details}</td>
+				<td style="width:220px;height:40px;">${bids?.Red_Amount}</td>
+				<td style="width:220px;height:40px;"><a
+					href="@{front.red.RedAction.redAdd()}">点击领取</a>
+				</td>
+			</tr>
+
+			#{/list}
+
+		</table>
+
+
+	</div>
+	
+	
+	
+	<div class="xf_mem_Account">
+	
+		<h3 class="xf_mem_accout_title">红包投资记录（新手标）</h3>
+	 	<table>
+       #{if  haha==1}
+                                                没有
+       #{/if}
+        
+		#{list items:sansan , as:'bi'}
+			<tr>
+			    <td style="width:220px;height:40px;">${bi?.roma_bid_id}号新手标</td>
+				<td style="width:220px;height:40px;">${bi?.roma_time}</td>
+				<td style="width:220px;height:40px;">${bi?.roma_amount}元</td>
+				#{if bi?.roma_invests_state == 0}
+				<td style="width:220px;height:40px;">未放款</td>
+				#{/if} 
+				#{if bi?.roma_invests_state == 1}
+				<td style="width:220px;height:40px;">等待放款</td>
+			    #{/if} 
+			    #{if bi?.roma_invests_state == 1}
+			    <td style="width:220px;height:40px;">已经放款</td>
+			     #{/if} 
+			</tr>
+
+			#{/list}
+
+		</table>
+
+
+	</div>
+	
+	
+	
+	
+	
+
+</div>

@@ -1,0 +1,299 @@
+
+ <div class="con2" style="background: #ffffff;">
+            <div class="Tit">
+                <ul>
+                    <li class="on"><a href="javascript:void(0)">投资车贷</a></li>
+                </ul>
+                <a class="more" alt="投资理财项目" href="@{front.invest.InvestAction.investHome()}">更多项目</a>
+            </div>
+            <div class="">
+             <ul class="ul-list">
+              #{list items:bidList , as:'bid'}  
+                 <li>
+	                 <div class="tit">
+	                     <div class="titl"><h3>
+                         <em class="proIcon_rjx"> #{img class:"lazy", data_original:"${bid?.creditLevel?.imageFilename}", src:"${bid?.creditLevel?.imageFilename}", alt:""}#{/img}</em>
+                          <a href="@{front.invest.InvestAction.invest(bid?.id)}">${bid?.title}</a> </h3>
+	                         <span>借款期限
+	                         <em>
+	                         #{if bid?.period_unit ==-1}
+												${bid?.period}年
+												#{/if}
+												#{if bid?.period_unit ==0}
+												${bid?.period}个月
+												#{/if}
+												#{if bid?.period_unit ==1}
+												${bid?.period}天
+							#{/if}	                         
+	                         </em></span>
+	                     </div>
+	                     <div class="titr">
+	                         <dl><dd class="d1">${bid?.repay_name} </dd><dd class="d2"></dd><dd class="d3">		#{if bid?.bonus_type == 0}
+							不设置奖励
+							#{/if}
+							#{if bid?.bonus_type == 1}
+							按固定奖金${bid?.bonus}元进行奖励
+							#{/if}
+							#{if bid?.bonus_type == 2}
+							按借款总额${bid?.award_scale}%进行奖励
+							#{/if}</dd></dl>
+	                     </div>
+	                 </div>
+	                 <div class="li-con">
+	                     <div class="cl">
+	                         <div class="sl">
+	                             <h3><b>${bid?.apr}</b><em>%</em></h3>	                             
+	                             <p>预期年化收益</p>
+	                         </div>
+	                         <div class="sr">
+	                             <span>标的总额：<em>${bid?.amount?.format('###,##0.00')}</em>元</span>
+	                             <span>可投金额：<em>#{format money:(bid?.amount-bid?.has_invested_amount)}#{/format}</em>元</span>
+	                             <span>编号：<em>${bid?.no}</em></span>
+	                            #{if bid?.min_invest_amount == 0} 
+	                             <span>按照份数认购</span>
+	                            #{/if}
+					            #{else}
+	                             <span>最低起投：<em>${bid?.min_invest_amount}</em>元</span>
+	                             #{/else}
+	                             
+	                         </div>	
+	                     </div>	   
+	                     <div class="cr">
+                         <a href="@{front.invest.InvestAction.invest(bid?.id)}" class="btn">
+                            
+                          #{if bid?.status == 1 || bid?.status == 2 || bid?.status == 3}
+									借款中
+									#{/if}
+									#{if bid?.status == 4 }
+									还款中
+									#{/if}
+									#{if bid?.status == 5 }
+									已还款
+									#{/if}
+									#{if bid?.status < 0 }
+									流标
+									#{/if}								  
+                          </a>
+                          <div class="rig_2" >
+                          
+    <span class="xf_c_idx_4_proWrap_ss"><span id="loanSchedule${bid_index}" class="xf_c_idx_4_proPer_ss">${bid?.loan_schedule}%</span>
+									</span>                          
+                          
+                          </div>
+	                     </div>
+	                     <div class="c"></div>
+	                 </div>
+                   </li>
+ 	            #{/list}
+           </ul>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="con2" style="background: #ffffff;">
+            <div class="Tit">
+                <ul>
+                    <li class="on"><a href="javascript:void(0)">投资房贷</a></li>
+                </ul>
+                <a class="more" alt="投资理财项目" href="@{front.invest.InvestAction.investHome()}">更多项目</a>
+            </div>
+            <div class="">
+             <ul class="ul-list">
+              #{list items:roomList , as:'bidu'}  
+                 <li>
+	                 <div class="tit">
+	                     <div class="titl"><h3>
+                         <em class="proIcon_rjx">#{img class:"lazy", data_original:"${bidu?.creditLevel?.imageFilename}", src:"${bidu?.creditLevel?.imageFilename}", alt:""}#{/img}</em>
+                          <a href="@{front.invest.InvestAction.invest(bidu?.id)}">${bidu?.title}</a> </h3>
+	                         <span>借款期限
+	                         <em>
+	                         #{if bidu?.period_unit ==-1}
+												${bidu?.period}年
+												#{/if}
+												#{if bidu?.period_unit ==0}
+												${bidu?.period}个月
+												#{/if}
+												#{if bidu?.period_unit ==1}
+												${bidu?.period}天
+							#{/if}	                         
+	                         </em></span>
+	                     </div>
+	                     <div class="titr">
+	                         <dl><dd class="d1">${bidu?.repay_name} </dd><dd class="d2"></dd><dd class="d3">		#{if bidu?.bonus_type == 0}
+							不设置奖励
+							#{/if}
+							#{if bidu?.bonus_type == 1}
+							按固定奖金${bidu?.bonus}元进行奖励
+							#{/if}
+							#{if bidu?.bonus_type == 2}
+							按借款总额${bidu?.award_scale}%进行奖励
+							#{/if}</dd></dl>
+	                     </div>
+	                 </div>
+	                 <div class="li-con">
+	                     <div class="cl">
+	                         <div class="sl">
+	                             <h3><b>${bidu?.apr}</b><em>%</em></h3>	                             
+	                             <p>预期年化收益</p>
+	                         </div>
+	                         <div class="sr">
+	                             <span>标的总额：<em>${bidu?.amount?.format('###,##0.00')}</em>元</span>
+	                             <span>可投金额：<em>#{format money:(bidu?.amount-bidu?.has_invested_amount)}#{/format}</em>元</span>
+	                             <span>编号：<em>${bidu?.no}</em></span>
+	                             
+	                             
+	                           #{if bid?.min_invest_amount == 0} 
+	                             <span>按照份数认购</span>
+	                            #{/if}
+					            #{else}
+	                             <span>最低起投：<em>${bidu?.min_invest_amount}</em>元</span>
+	                             #{/else}
+	                             
+	                             
+	                         </div>	
+	                     </div>	   
+	                     <div class="cr">
+                         <a href="@{front.invest.InvestAction.invest(bidu?.id)}" class="btn">
+                         
+                                 #{if bidu?.status == 1 || bidu?.status == 2 || bidu?.status == 3}
+									借款中
+									#{/if}
+									#{if bidu?.status == 4 }
+									还款中
+									#{/if}
+									#{if bidu?.status == 5 }
+									已还款
+									#{/if}
+									#{if bidu?.status < 0 }
+									流标
+									#{/if}                     
+                         </a>
+                          <div class="rig_2" >
+                          
+                          <span class="xf_c_idx_4_proWrap_ss"><span id="loanSchedule${bidu?.id}" class="xf_c_idx_4_proPer_ss">${bidu?.loan_schedule}%</span>
+									</span>
+                          
+                          </div>
+	                     </div>
+	                     <div class="c"></div>
+	                 </div>
+                   </li>
+ 	            #{/list}
+           </ul>
+       </div>
+       
+
+
+
+
+
+
+
+
+
+
+<div class="con2" style="background: #ffffff;">
+            <div class="Tit">
+                <ul>
+                    <li class="on"><a href="javascript:void(0)">新手送礼</a></li>
+                </ul>
+                <a class="more" alt="投资理财项目" href="@{front.invest.InvestAction.investHome()}">更多项目</a>
+            </div>
+            <div class="">
+             <ul class="ul-list">
+              #{list items:newbids , as:'biduu'}  
+                 <li>
+	                 <div class="tit">
+	                     <div class="titl"><h3>
+                         <em class="proIcon_rjx"></em>
+                          <a href="">${biduu?.roma_title}</a> </h3>
+	                         <span>借款期限
+	                         <em>
+	                            ${biduu?.roma_period} 天
+	                         </em></span>
+	                     </div>
+	                     <div class="titr">
+	                         <dl><dd class="d1">${biduu?.roma_repaymentType} </dd><dd class="d2"></dd><dd class="d3">
+							不设置奖励
+							</dd></dl>
+	                     </div>
+	                 </div>
+	                 <div class="li-con">
+	                     <div class="cl">
+	                         <div class="sl">
+	                             <h3><b>${biduu?.roma_apr}</b><em>%</em></h3>	                             
+	                             <p>预期年化收益</p>
+	                         </div>
+	                         <div class="sr">
+	                             <span>标的总额：<em>1000000</em>元</span>
+	                             <span>可投金额：<em>700000</em>元</span>
+	                             <span>编号：<em>${biduu?.roma_bid_no}</em></span>
+	                             <span>最低起投：<em>1000</em>元</span>
+	                         </div>	
+	                     </div>	   
+	                     <div class="cr">
+                         <a href="@{front.invest.Roma_InvestAction.detailsRomaBid()}" class="btn" style="background-color:#088A29;">
+							借款中									            
+                         </a>
+                          <div class="rig_2" >
+                          
+                          <span class="xf_c_idx_4_proWrap_ss"><span id="loanSchedule30" class="xf_c_idx_4_proPer_ss">30%</span>
+									</span>
+                          
+                          </div>
+	                     </div>
+	                     <div class="c"></div>
+	                 </div>
+                   </li>
+ 	            #{/list}
+           </ul>
+       </div>
+       
+
+
+
+
+
+
+
+       
+ 
+ 
+       
+<div class="c"></div>
+
+
+
+
+
+<!--进度条 -->
+<script>
+		$(function(){
+			
+				#{list items:bidList , as:'bid'}
+				
+				 $('#loanSchedule'+${bid_index}).css({"width":${bid?.loan_schedule}})
+				 
+				#{/list}
+			
+					
+				#{list items:roomList , as:'bidu'}  
+				
+				 $('#loanSchedule'+${bidu?.id}).css({"width":${bidu?.loan_schedule}})
+				 
+				#{/list}
+			
+		   })
+</script>		   
+		   
+		   
